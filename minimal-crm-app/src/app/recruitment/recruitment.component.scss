@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+  }
+  
+th {
+  width: 20%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.rect-tab {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mat-mdc-row:hover {
+  background-color: #F0F8FF !important;
+  cursor: pointer;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: calc(100% - 20px);
+  margin: 10px;
+}

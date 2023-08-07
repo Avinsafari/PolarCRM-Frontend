@@ -1,10 +1,10 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
 import { navbarData } from './nav-data';
 
 interface SideNavToggle {
   screenWidth: number;
-  collapsed: boolean;
+  extended: boolean;
 }
 
 @Component({
@@ -25,23 +25,13 @@ interface SideNavToggle {
           style({opacity: 0})
         )
       ])
-    ]),
-    trigger('rotate', [
-      transition(':enter', [
-        animate('1000ms', 
-          keyframes([
-            style({transform: 'rotate(0deg)', offset: '0'}),
-            style({transform: 'rotate(2turn)', offset: '1'})
-          ])
-        )
-      ])
     ])
   ]
 })
 export class SidenavComponent implements OnInit {
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
-  collapsed = false;
+  extended = false;
   screenWidth = 0;
   navData = navbarData;
 
@@ -49,8 +39,8 @@ export class SidenavComponent implements OnInit {
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
     if(this.screenWidth <= 768 ) {
-      this.collapsed = false;
-      this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+      this.extended = false;
+      this.onToggleSideNav.emit({extended: this.extended, screenWidth: this.screenWidth});
     }
   }
 
@@ -59,12 +49,12 @@ export class SidenavComponent implements OnInit {
   }
 
   toggleCollapse(): void {
-    this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+    this.extended = !this.extended;
+    this.onToggleSideNav.emit({extended: this.extended, screenWidth: this.screenWidth});
   }
 
   closeSidenav(): void {
-    this.collapsed = false;
-    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+    this.extended = false;
+    this.onToggleSideNav.emit({extended: this.extended, screenWidth: this.screenWidth});
   }
 }

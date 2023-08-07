@@ -1,5 +1,7 @@
-<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-<app-body
-    [collapsed]="isSideNavCollapsed"
-    [screenWidth]="screenWidth"
-></app-body>
+<div class="main">
+    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+    <app-body
+        [extended]="isSideNavExtended"
+        [screenWidth]="screenWidth"
+    ></app-body>
+</div>
