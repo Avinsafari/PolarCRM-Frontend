@@ -1,12 +1,46 @@
 .content {
-    display: flex;
-    flex-wrap: wrap;
-    
+    height: calc(100vh - 10rem);
+    width: 100%;
+    display: grid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    grid-template-columns: 1.5fr 3fr 3fr;
+    grid-template-rows: repeat(13, 1fr);
+    gap: 20px 60px;
 }
 
-p {
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px;
-    font-size: 18px;
+.labels {
+    width: 100%;
+    p {
+        text-align: right;
+        margin-left: 20px;
+        font-size: 16px;
+        padding: 5px;
+    }
+}
+
+.infos {
+    width: 100%;
+    p {
+        margin-left: 20px;
+        font-size: 16px;
+        background-color: aliceblue;
+        padding: 5px;
+        border-radius: 10%;
+    }
+}
+
+.changelog {
+    border-radius: 6%;
+    border-color: aliceblue;
+    border-style: double;
+    margin: 10px;
+    .header {
+        font-size: 18px;
+        margin: 25px;
+    }
+
+    p {
+        margin: 0px 15px;
+    }
 }
