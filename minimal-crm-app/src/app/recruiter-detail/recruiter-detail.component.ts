@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserData } from '../recruitment/recruitment.component';
+import { ApplicantData } from '../interfaces';
 
 @Component({
   selector: 'app-recruiter-detail',
@@ -15,7 +15,7 @@ export class RecruiterDetailComponent implements OnInit {
   constructor(
       private fb: FormBuilder,
       private dialogRef: MatDialogRef<RecruiterDetailComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: UserData
+      @Inject(MAT_DIALOG_DATA) public data: ApplicantData
     ) 
     {
         this.id = data.id;
