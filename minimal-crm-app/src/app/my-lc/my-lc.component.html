@@ -1,10 +1,32 @@
 <div class="main">
     <h1>My Local Committee</h1>
 
-    <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput placeholder="Search">
-    </mat-form-field>
+    <mat-card>
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+          <!-- use a disabled button to provide padding for tree leaf -->
+          <button mat-icon-button disabled></button>
+          {{node.name}}
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+          <button mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'Toggle ' + node.name">
+            <mat-icon>
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          {{node.name}}
+        </mat-tree-node>
+      </mat-tree>
+    </mat-card>
 </div>
 
-<!-- Use mat tree here for LC structure -->
+<ng-template ngIf="userRole == 1">
+
+</ng-template>
+
+<ng-template ngIf="userRole == 2">
+
+</ng-template>

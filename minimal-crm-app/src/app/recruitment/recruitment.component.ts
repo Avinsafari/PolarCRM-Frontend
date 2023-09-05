@@ -4,9 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RecruiterDetailComponent } from '../recruiter-detail/recruiter-detail.component';
-import { ApplicantData } from '../interfaces';
+import { UserData } from '../interfaces';
 
-const DATA: ApplicantData[] = [
+const DATA: UserData[] = [
   {id: 1, firstName: 'Hydrogen' , familyName: 'J.', lc: 'Berlin TU'   , status: 'Open'      },
   {id: 2, firstName: 'Helium'   , familyName: 'J.', lc: 'Berlin HU'   , status: 'Accepted'  },
   {id: 3, firstName: 'Lithium'  , familyName: 'J.', lc: 'Aachen'      , status: 'Rejected'  },
@@ -62,7 +62,7 @@ const DATA: ApplicantData[] = [
 
 export class RecruitmentComponent implements AfterViewInit{
   displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'status'];
-  dataSource: MatTableDataSource<ApplicantData>;
+  dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
