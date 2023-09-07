@@ -1,58 +1,11 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RecruiterDetailComponent } from '../recruiter-detail/recruiter-detail.component';
 import { ApplicantData } from '../interfaces';
-
-const DATA: ApplicantData[] = [
-  {id: 1, firstName: 'Hydrogen' , familyName: 'J.', lc: 'Berlin TU'   , status: 'Open'      },
-  {id: 2, firstName: 'Helium'   , familyName: 'J.', lc: 'Berlin HU'   , status: 'Accepted'  },
-  {id: 3, firstName: 'Lithium'  , familyName: 'J.', lc: 'Aachen'      , status: 'Rejected'  },
-  {id: 4, firstName: 'Beryllium', familyName: 'J.', lc: 'Braunschweig', status: 'Open'      },
-  {id: 5, firstName: 'Boron'    , familyName: 'J.', lc: 'Koeln'       , status: 'Contacted' },
-  {id: 6, firstName: 'Carbon'   , familyName: 'J.', lc: 'Frankfurt'   , status: 'Open'      },
-  {id: 7, firstName: 'Nitrogen' , familyName: 'J.', lc: 'Bonn'        , status: 'Contacted' },
-  {id: 8, firstName: 'Oxygen'   , familyName: 'J.', lc: 'Regensburg'  , status: 'Accepted'  },
-  {id: 9, firstName: 'Fluorine' , familyName: 'J.', lc: 'Muenchen'    , status: 'Accepted'  },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-  {id: 10, firstName: 'Neon'    , familyName: 'J.', lc: 'Leipzig'     , status: 'Open'      },
-];
+import { ApplicantService } from '../applicant.service';
 
 @Component({
   selector: 'app-recruitment',
@@ -60,19 +13,22 @@ const DATA: ApplicantData[] = [
   styleUrls: ['./recruitment.component.scss']
 })
 
-export class RecruitmentComponent implements AfterViewInit{
+export class RecruitmentComponent implements OnInit {
   displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'status'];
   dataSource: MatTableDataSource<ApplicantData>;
+  applicants: ApplicantData[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(DATA);
-  }
+  constructor(public dialog: MatDialog, private applicantService: ApplicantService) { }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  ngOnInit(): void {
+    this.applicantService.getApplicants().subscribe(applicants => {
+      this.applicants = applicants;
+      this.dataSource = new MatTableDataSource(this.applicants);
+      this.dataSource.paginator = this.paginator;
+    });    
   }
 
   applyFilter(event: Event) {
@@ -88,9 +44,8 @@ export class RecruitmentComponent implements AfterViewInit{
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.data = DATA[0];
+    dialogConfig.data = this.applicants[0];
 
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
-    console.log("Clicked");
   }
 }
