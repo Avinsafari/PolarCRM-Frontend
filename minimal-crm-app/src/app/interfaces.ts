@@ -1,8 +1,8 @@
 export interface ApplicantData {
-  id: number;
+  _id: number;
+  lc: string;
   firstName: string;
   familyName: string;
-  lc: string;
   status: string;
 }
   
@@ -11,9 +11,12 @@ export interface ApplicantDataDetail extends ApplicantData {
   telephone: number;
   occupation: string;
   german: string;
-  channel: string;
   motivation: string;
-  cv: any;
+  linkedin: string;
+  cv?: string; 
+  mktChannel: string;
+  signedUp: Date;
   team: string;
-  changelog?: string;
+  changelog: string[];
+  comments: string[];
 }

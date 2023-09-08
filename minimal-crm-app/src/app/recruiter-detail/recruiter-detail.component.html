@@ -19,7 +19,18 @@
         <p>Euphonious </p>
         <p>Garcia </p>
         <p>Aachen </p>
-        <p>Accepted </p>
+        <select>
+            <option value="open">Open</option>
+            <option value="contacted">Contacted</option>
+            <option value="toBeInterviewed">To Be Interviewed</option>
+            <option value="interviewed">Interviewed</option>
+            <option value="onHold">On Hold</option>
+            <option value="toBeRejected">To Be Rejected</option>
+            <option value="rejected">Rejected</option>
+            <option value="candidateNotInterested">Candidate Not Interested</option>
+            <option value="selected">Selected</option>
+            <option value="duplicate">Duplicate</option>
+        </select>
         <p>eupho.garcia@aiesec.de </p>
         <p>0123456789 </p>
         <p>Student </p>
@@ -36,5 +47,13 @@
         <p>14.03.2023 - Status changed: Interviewed </p>
         <p>15.03.2023 - Status changed: Accepted </p>
     </div>
+    
+    <div class="chatbox">
+        <div id='chatborder'>
+            <p *ngFor="let comment of comments" class="chatlog">{{comment}}</p>
+            <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+        </div>
+    </div>
+    <button (onclick)="saveApplicantChanges()">Save Changes</button>
     
 </div>
