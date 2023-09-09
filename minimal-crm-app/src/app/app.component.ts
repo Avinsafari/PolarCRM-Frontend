@@ -12,6 +12,7 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'minimal-crm-app';
+  authorized = true;
 
   isSideNavExtended = false;
   screenWidth = 0;

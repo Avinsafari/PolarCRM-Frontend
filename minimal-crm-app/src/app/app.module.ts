@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { GoalSettingComponent } from './goal-setting/goal-setting.component';
 import { MyLcComponent } from './my-lc/my-lc.component';
 import { RecruiterDetailComponent } from './recruiter-detail/recruiter-detail.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { RecruiterDetailComponent } from './recruiter-detail/recruiter-detail.co
     RecruitmentComponent,
     GoalSettingComponent,
     MyLcComponent,
-    RecruiterDetailComponent
+    RecruiterDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +48,12 @@ import { RecruiterDetailComponent } from './recruiter-detail/recruiter-detail.co
     MatFormFieldModule,
     MatCardModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatTreeModule,
+    MatIconModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

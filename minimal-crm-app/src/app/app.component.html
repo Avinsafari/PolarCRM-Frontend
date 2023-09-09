@@ -1,7 +1,12 @@
 <div class="main">
-    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-    <app-body
-        [extended]="isSideNavExtended"
-        [screenWidth]="screenWidth"
-    ></app-body>
+    <ng-container *ngIf="authorized">
+        <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+        <app-body
+            [extended]="isSideNavExtended"
+            [screenWidth]="screenWidth"
+        ></app-body>
+    </ng-container>
+    <ng-container *ngIf="!authorized">
+        <app-login></app-login>
+    </ng-container>
 </div>

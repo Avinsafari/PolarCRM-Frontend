@@ -20,3 +20,15 @@ export interface ApplicantDataDetail extends ApplicantData {
   changelog: string[];
   comments: string[];
 }
+
+// export interface MemberData extends UserData{
+
+// }
+
+// export interface MemberRole {
+//   member_id: number,
+//   role_id: number,
+//   function: string,
+//   jd: string,
+//   first_date_of_membership: number
+// }
