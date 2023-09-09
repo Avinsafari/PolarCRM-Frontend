@@ -1,3 +1,5 @@
 .main {
-    display: flex;
+    display: flex; //this makes the border appear and disappear sometimes?
+    display: grid;
+    grid-template-columns: 100fr 12fr; //2 columns works but size is not correct??
 }
