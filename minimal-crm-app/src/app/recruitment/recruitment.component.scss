@@ -1,6 +1,21 @@
+mat-card {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+// .filter {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // mat-chip-option .mat-mdc-chip-selected {
+  //   background-color: #263238 !important;
+  // }
+// }
+
 table {
     width: 100%;
-  }
+}
   
 th {
   width: 20%;
@@ -9,12 +24,6 @@ th {
 .main {
   display: flex;
   flex-direction: column;
-}
-
-.rect-tab {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 .mat-mdc-row:hover {
@@ -27,3 +36,9 @@ th {
   width: calc(100% - 20px);
   margin: 10px;
 }
+
+// mat-chip-listbox {
+//   align-self: center;
+//   width: calc(35% - 50px);
+//   margin: 25px 25px 40px 25px;
+// }

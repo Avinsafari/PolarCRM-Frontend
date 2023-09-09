@@ -1,15 +1,13 @@
 .body {
-    width: calc(100vw - 6rem);
+    width: calc(100vw - 5rem);
     height: 100vh;
-    margin-left: 1rem;
     transition: all .5s ease;
     background: #f4f7fa;
     padding: 3rem;
 }
 
 .body-trimmed {
-    margin-left: 1rem;
-    width: calc(100vw - 16rem);
+    width: calc(100vw - 15rem);
 }
 
 .body-mobile {

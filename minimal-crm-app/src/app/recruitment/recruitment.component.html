@@ -2,47 +2,49 @@
     <h1>Recruitment</h1>
 
     <mat-card>
-        <div class="rec-tab">
+        <!-- <div class="filter"> -->
             <mat-form-field>
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
             </mat-form-field>
-
-            <table mat-table [dataSource]="dataSource" matSort>
-        
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row._id}} </td>
-            </ng-container>
-            <ng-container matColumnDef="lc">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Local Committee </th>
-                <td mat-cell *matCellDef="let row"> {{row.lc}} </td>
-            </ng-container>
-            <ng-container matColumnDef="first-name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
-            </ng-container>
-            <ng-container matColumnDef="family-name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Family Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.familyName}} </td>
-            </ng-container>
-            <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell *matCellDef="let row"> {{row.status}} </td>
-            </ng-container>
-        
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row
-                (click)="openDetails()"
-                *matRowDef="let row; columns: displayedColumns;"
-            ></tr>
-        
-            <tr *matNoDataRow>
-                <td colspan="5">No data matching the filter "{{input.value}}"</td>
-            </tr> 
-            </table>
-        
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
-        </div>
+            <!-- <mat-chip-listbox> -->
+                <!-- <mat-chip-option>Archived Applicants</mat-chip-option> -->
+            <!-- </mat-chip-listbox> -->
+        <!-- </div> -->
+        <table mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row._id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Local Committee </th>
+            <td mat-cell *matCellDef="let row"> {{row.lc}} </td>
+        </ng-container>
+        <ng-container matColumnDef="first-name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="family-name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Family Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.familyName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            (click)="openDetails()"
+            *matRowDef="let row; columns: displayedColumns;"
+        ></tr>
+    
+        <tr *matNoDataRow>
+            <td colspan="5">No data matching the filter "{{input.value}}"</td>
+        </tr> 
+        </table>
+    
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
     </mat-card>
 </ng-container>
