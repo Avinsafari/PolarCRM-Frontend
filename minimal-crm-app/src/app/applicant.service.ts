@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 export class ApplicantService {
     
     previewAllApplicantsUrl = "http://localhost:8000/applicants/preview";
-    detailOneApplicantUrl = "http://localhost:8000/applicants/detail";
+    detailOneApplicantUrl = "http://localhost:8000/applicants/detail/";
 
     constructor(private http: HttpClient){}
 
@@ -18,6 +18,6 @@ export class ApplicantService {
     }
 
     getApplicantDetails(_id: number): Observable<ApplicantDataDetail> {
-        return this.http.post<ApplicantDataDetail>(this.detailOneApplicantUrl, _id, { headers: { 'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*'}});
+        return this.http.get<ApplicantDataDetail>(this.detailOneApplicantUrl + _id.toString(), { headers: {'Access-Control-Allow-Origin': '*'}});
     }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ApplicantData, ApplicantDataDetail } from '../interfaces';
@@ -9,12 +9,12 @@ import { ApplicantService } from '../applicant.service';
   templateUrl: './recruiter-detail.component.html',
   styleUrls: ['./recruiter-detail.component.scss']
 })
-export class RecruiterDetailComponent implements OnInit, AfterViewInit {
+export class RecruiterDetailComponent implements OnInit {
   form: FormGroup;
   id: number;
   comments: string[];
   newComment: string;
-  applicantDetails: ApplicantDataDetail;
+  applicantDetails: ApplicantDataDetail | null;
 
   constructor(
       private fb: FormBuilder,
@@ -31,11 +31,7 @@ export class RecruiterDetailComponent implements OnInit, AfterViewInit {
         
         this.comments = [];
         this.newComment = "";
-    }
-
-    async ngAfterViewInit() { //async here not recommended
-        await this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
-            console.table(applicantData);
+        this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
             this.applicantDetails = applicantData;
         });
     }

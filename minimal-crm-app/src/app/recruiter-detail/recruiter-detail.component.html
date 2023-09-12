@@ -12,13 +12,13 @@
         <p>Recruitment Channel: </p>
         <p>Motivation for joining: </p>
         <p>CV: </p>
-        <p>Team interested in joining: </p>
+        <p>LinkedIn: </p>
     </div>
     <div class="infos">
-        <p>1236492 </p>
-        <p>Euphonious </p>
-        <p>Garcia </p>
-        <p>Aachen </p>
+        <p>{{applicantDetails?._id}}</p>
+        <p>{{applicantDetails?.firstName}}</p>
+        <p>{{applicantDetails?.familyName}} </p>
+        <p>{{applicantDetails?.lc}}</p>
         <select>
             <option value="open">Open</option>
             <option value="contacted">Contacted</option>
@@ -31,14 +31,14 @@
             <option value="selected">Selected</option>
             <option value="duplicate">Duplicate</option>
         </select>
-        <p>eupho.garcia@aiesec.de </p>
-        <p>0123456789 </p>
-        <p>Student </p>
-        <p>Mother tongue </p>
-        <p>Facebook </p>
-        <p>Networking </p>
-        <p>CV here </p>
-        <p>Talent Management </p>
+        <p>{{applicantDetails?.email}}</p>
+        <p>{{applicantDetails?.telephone}} </p>
+        <p>{{applicantDetails?.occupation}} </p>
+        <p>{{applicantDetails?.german}}</p>
+        <p>{{applicantDetails?.mktChannel}}</p>
+        <p>{{applicantDetails?.motivation}}</p>
+        <p>{{applicantDetails?.cv}} None </p>
+        <p><a [href]="applicantDetails?.linkedin">{{applicantDetails?.linkedin}}</a></p>
     </div>
     <div class="changelog">
         <p class="header">Changelog: </p>

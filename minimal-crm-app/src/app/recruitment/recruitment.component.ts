@@ -40,11 +40,11 @@ export class RecruitmentComponent implements OnInit {
     }
   }
 
-  openDetails() {
+  openDetails(id: number) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.data = this.applicants[0];
+    dialogConfig.data = this.applicants[id];
 
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
   }
