@@ -1,0 +1,65 @@
+<div class="content">
+    <div class="labels">
+        <p>Member ID: </p>
+        <p>First Name: </p>
+        <p>Family Name: </p>
+        <p>Local Committee: </p>
+        <p>Status: </p>
+        <p>Email: </p>
+        <p>Telephone Number: </p>
+        <p>Expa ID: </p>
+        <p>AIESEC Email: </p>
+        <p>Data Security Files: </p>
+        <p>Member Since: </p>
+        <p>Role: </p>
+        <p>Function: </p>
+        <p>Job Description: </p>
+        <p>In Role Since: </p>
+        <p>In Role Until: </p>
+        <p>Previous Roles: </p>
+    </div>
+    <div class="infos">
+        <p>{{memberDetails?._id}}</p>
+        <p>{{memberDetails?.firstName}}</p>
+        <p>{{memberDetails?.familyName}} </p>
+        <p>{{memberDetails?.lc}}</p>
+        <p>{{memberDetails?.status}}</p>
+        <select>
+            <option value="accepted">Accepted</option>
+            <option value="approved">Approved</option>
+            <option value="realized">Realized</option>
+            <option value="finished">Finished</option>
+            <option value="completed">Completed</option>
+            <option value="advanced">Advanced</option>
+            <option value="alumni">Alumni</option>
+        </select>
+        <p>{{memberDetails?.email}}</p>
+        <p>{{memberDetails?.telephone}} </p>
+        <p>{{memberDetails?.expaId}} </p>
+        <p>{{memberDetails?.aiesecEmail}}</p>
+        <p>{{memberDetails?.files}}</p>
+        <p>{{memberDetails?.createdAt}}</p>
+        <p>Newbie</p>
+        <p>TM</p>
+        <p>Recruiter</p>
+        <p>11.09.2023</p>
+        <p>11.03.2024</p>
+        <p>111</p>
+    </div>
+    <div class="changelog">
+        <p class="header">Changelog: </p>
+        <p>12.03.2023 - Status changed: Open </p>
+        <p>13.03.2023 - Status changed: Contacted </p>
+        <p>14.03.2023 - Status changed: Interviewed </p>
+        <p>15.03.2023 - Status changed: Accepted </p>
+    </div>
+    
+    <div class="chatbox">
+        <div id='chatborder'>
+            <p *ngFor="let comment of comments" class="chatlog">{{comment}}</p>
+            <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+        </div>
+    </div>
+    <button (onclick)="saveMemberChanges()">Save Changes</button>
+    
+</div>

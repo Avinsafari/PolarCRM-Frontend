@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyLcComponent } from './my-lc.component';
+import { MembersComponent } from './members.component';
 
-describe('MyLcComponent', () => {
-  let component: MyLcComponent;
-  let fixture: ComponentFixture<MyLcComponent>;
+describe('MembersComponent', () => {
+  let component: MembersComponent;
+  let fixture: ComponentFixture<MembersComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MyLcComponent]
+      declarations: [MembersComponent]
     });
-    fixture = TestBed.createComponent(MyLcComponent);
+    fixture = TestBed.createComponent(MembersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -10,9 +10,9 @@ export const navbarData = [
         label: 'Recruitment'
     },
     {
-        routeLink: 'my-lc',
+        routeLink: 'members',
         icon: 'fal fa-users',
-        label: 'My LC'
+        label: 'Members'
     },
     {
         routeLink: 'goal-setting',

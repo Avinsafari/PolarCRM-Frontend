@@ -1,0 +1,57 @@
+mat-card {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  table {
+      width: 100%;
+  }
+    
+  th {
+    width: 20%;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mat-mdc-row:hover {
+    background-color: #F0F8FF !important;
+    cursor: pointer;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: calc(100% - 20px);
+    margin: 10px;
+  }
+
+  .mat-column-id {
+    width: 5%;
+  }
+
+  .mat-column-first-name {
+    width: 20%;
+  }
+
+  .mat-column-lc {
+    width: 15%;
+  }
+
+  .mat-column-role-current {
+    width: 15%;
+  }
+
+  .mat-column-team-current {
+    width: 15%;
+  }
+
+  .mat-column-status {
+    width: 10%;
+  }
+
+  .mat-column-verified {
+    width: 5%;
+  }
