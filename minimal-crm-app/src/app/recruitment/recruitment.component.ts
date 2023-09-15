@@ -14,9 +14,10 @@ import { ApplicantService } from '../applicant.service';
 })
 
 export class RecruitmentComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'status'];
+  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'status', 'signup-date'];
   dataSource: MatTableDataSource<ApplicantData>;
   applicants: ApplicantData[] = [];
+  openCounter: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,7 +29,10 @@ export class RecruitmentComponent implements OnInit {
       this.applicants = applicants;
       this.dataSource = new MatTableDataSource(this.applicants);
       this.dataSource.paginator = this.paginator;
-    });    
+    });
+    this.applicantService.getNumberOfOpens().subscribe(counter => {
+      this.openCounter = counter;
+    })
   }
 
   applyFilter(event: Event) {

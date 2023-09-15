@@ -8,10 +8,15 @@ import { Observable } from "rxjs";
 })
 export class ApplicantService {
     
+    openCountUrl = "http://localhost:8000/applicants/open-count";
     previewAllApplicantsUrl = "http://localhost:8000/applicants/preview";
     detailOneApplicantUrl = "http://localhost:8000/applicants/detail/";
 
     constructor(private http: HttpClient){}
+
+    getNumberOfOpens(): Observable<number> {
+        return this.http.get<number>(this.openCountUrl);
+    }
 
     getApplicants(): Observable<ApplicantData[]> {
         return this.http.get<ApplicantData[]>(this.previewAllApplicantsUrl);
