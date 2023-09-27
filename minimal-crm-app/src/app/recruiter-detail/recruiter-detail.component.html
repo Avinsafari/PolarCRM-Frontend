@@ -19,17 +19,8 @@
         <p>{{applicantDetails?.firstName}}</p>
         <p>{{applicantDetails?.familyName}} </p>
         <p>{{applicantDetails?.lc}}</p>
-        <select>
-            <option value="open">Open</option>
-            <option value="contacted">Contacted</option>
-            <option value="toBeInterviewed">To Be Interviewed</option>
-            <option value="interviewed">Interviewed</option>
-            <option value="onHold">On Hold</option>
-            <option value="toBeRejected">To Be Rejected</option>
-            <option value="rejected">Rejected</option>
-            <option value="candidateNotInterested">Candidate Not Interested</option>
-            <option value="selected">Selected</option>
-            <option value="duplicate">Duplicate</option>
+        <select [(ngModel)]="currentApplicantStatus">
+            <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.name}}</option>
         </select>
         <p>{{applicantDetails?.email}}</p>
         <p>{{applicantDetails?.telephone}} </p>
@@ -50,10 +41,10 @@
     
     <div class="chatbox">
         <div id='chatborder'>
-            <p *ngFor="let comment of comments" class="chatlog">{{comment}}</p>
+            <p *ngFor="let comment of applicantDetails?.comments" class="chatlog">{{comment}}</p>
             <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
         </div>
     </div>
-    <button (onclick)="saveApplicantChanges()">Save Changes</button>
+    <button (click)="saveApplicantChanges()">Save Changes</button>
     
 </div>
