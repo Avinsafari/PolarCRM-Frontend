@@ -9,6 +9,16 @@
     gap: 20px 60px;
 }
 
+.loading {
+    height: calc(100vh - 10rem);
+    width: calc(100vw - 30rem);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .labels {
     width: 100%;
     p {

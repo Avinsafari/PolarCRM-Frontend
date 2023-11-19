@@ -1,50 +1,60 @@
-<div class="content">
-    <div class="labels">
-        <p>Applicant ID: </p>
-        <p>First Name: </p>
-        <p>Family Name: </p>
-        <p>Local Committee: </p>
-        <p>Status: </p>
-        <p>Email: </p>
-        <p>Telephone Number: </p>
-        <p>Occupation: </p>
-        <p>German Level: </p>
-        <p>Recruitment Channel: </p>
-        <p>Motivation for joining: </p>
-        <p>CV: </p>
-        <p>LinkedIn: </p>
-    </div>
-    <div class="infos">
-        <p>{{applicantDetails?._id}}</p>
-        <p>{{applicantDetails?.firstName}}</p>
-        <p>{{applicantDetails?.familyName}} </p>
-        <p>{{applicantDetails?.lc}}</p>
-        <select [(ngModel)]="currentApplicantStatus">
-            <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
-        </select>
-        <p>{{applicantDetails?.email}}</p>
-        <p>{{applicantDetails?.telephone}} </p>
-        <p>{{applicantDetails?.occupation}} </p>
-        <p>{{applicantDetails?.german}}</p>
-        <p>{{applicantDetails?.mktChannel}}</p>
-        <p>{{applicantDetails?.motivation}}</p>
-        <p>{{applicantDetails?.cv}} None </p>
-        <p><a [href]="applicantDetails?.linkedin">{{applicantDetails?.linkedin}}</a></p>
-    </div>
-    <div class="changelog">
-        <p class="header">Changelog: </p>
-        <p>12.03.2023 - Status changed: Open </p>
-        <p>13.03.2023 - Status changed: Contacted </p>
-        <p>14.03.2023 - Status changed: Interviewed </p>
-        <p>15.03.2023 - Status changed: Accepted </p>
-    </div>
-    
-    <div class="chatbox">
-        <div id='chatborder'>
-            <p *ngFor="let comment of applicantDetails?.comments" class="chatlog">{{comment}}</p>
-            <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+<ng-container *ngIf="ready then content else loading"></ng-container>
+
+<ng-template #content>
+    <div class="content">
+        <div class="labels">
+            <p>Applicant ID: </p>
+            <p>First Name: </p>
+            <p>Family Name: </p>
+            <p>Local Committee: </p>
+            <p>Status: </p>
+            <p>Email: </p>
+            <p>Telephone Number: </p>
+            <p>Occupation: </p>
+            <p>German Level: </p>
+            <p>Recruitment Channel: </p>
+            <p>Motivation for joining: </p>
+            <p>CV: </p>
+            <p>LinkedIn: </p>
         </div>
+        <div class="infos">
+            <p>{{applicantDetails._id}}</p>
+            <p>{{applicantDetails.firstName}}</p>
+            <p>{{applicantDetails.familyName}} </p>
+            <p>{{applicantDetails.lc}}</p>
+            <select [(ngModel)]="currentApplicantStatus">
+                <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
+            </select>
+            <p>{{applicantDetails.email}}</p>
+            <p>{{applicantDetails.telephone}} </p>
+            <p>{{applicantDetails.occupation}} </p>
+            <p>{{applicantDetails.german}}</p>
+            <p>{{applicantDetails.mktChannel}}</p>
+            <p>{{applicantDetails.motivation}}</p>
+            <p>{{applicantDetails.cv}} None </p>
+            <p><a [href]="applicantDetails.linkedin">{{applicantDetails.linkedin}}</a></p>
+        </div>
+        <div class="changelog">
+            <p class="header">Changelog: </p>
+            <p>12.03.2023 - Status changed: Open </p>
+            <p>13.03.2023 - Status changed: Contacted </p>
+            <p>14.03.2023 - Status changed: Interviewed </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+        </div>
+        
+        <div class="chatbox">
+            <div id='chatborder'>
+                <p *ngFor="let comment of applicantDetails?.comments" class="chatlog">{{comment}}</p>
+                <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+            </div>
+        </div>
+        <button (click)="saveApplicantChanges()">Save Changes</button>
+        
     </div>
-    <button (click)="saveApplicantChanges()">Save Changes</button>
-    
-</div>
+</ng-template>
+
+<ng-template #loading>
+    <div class="loading">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

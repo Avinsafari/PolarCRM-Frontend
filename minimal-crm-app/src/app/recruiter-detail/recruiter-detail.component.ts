@@ -11,6 +11,7 @@ import { MemberService } from '../member.service';
 })
 export class RecruiterDetailComponent implements OnInit {
   id: number;
+  ready: boolean = false;
   comments: string[];
   newComment: string;
   applicantStages: ApplicantStages[] = [
@@ -29,43 +30,42 @@ export class RecruiterDetailComponent implements OnInit {
   applicantDetails: ApplicantDataDetail;
 
   constructor(
-      private dialogRef: MatDialogRef<RecruiterDetailComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: ApplicantData,
-      private applicantService: ApplicantService,
-      private memberService: MemberService
-    ) { }
+    private dialogRef: MatDialogRef<RecruiterDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ApplicantData,
+    private applicantService: ApplicantService,
+    private memberService: MemberService
+  ) { }
 
-    ngOnInit() {
-        this.id = this.data._id;
-        
-        this.comments = [];
-        this.newComment = "";
-        this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
-            this.applicantDetails = applicantData;
-            this.currentApplicantStatus = this.applicantDetails?.status;
-        });
+  ngOnInit() {
+    this.id = this.data._id;
+    
+    this.comments = [];
+    this.newComment = "";
+    this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
+      this.applicantDetails = applicantData;
+      this.currentApplicantStatus = this.applicantDetails.status;
+      this.ready = true;
+    });
+  }
+  close() {
+    this.dialogRef.close();
+    this.ready = false;
+  }
+  addComment() {
+    if (this.newComment != "") {
+      this.applicantDetails?.comments.push(this.newComment);
+      this.newComment = "";
     }
-
-    close() {
-        this.dialogRef.close();
+  }
+  saveApplicantChanges() {
+    this.applicantDetails.status = this.currentApplicantStatus;
+    this.applicantService.updateApplicantStatus(this.applicantDetails).subscribe();
+    
+    if(this.currentApplicantStatus == "selected"){
+      try{
+        this.memberService.createNewMember(this.applicantDetails).subscribe();
+      }catch(err) {}
     }
-
-    addComment() {
-        if (this.newComment != "") {
-            this.applicantDetails?.comments.push(this.newComment);
-            this.newComment = "";
-        }
-    }
-
-    saveApplicantChanges() {
-        this.applicantDetails.status = this.currentApplicantStatus;
-        this.applicantService.updateApplicantStatus(this.applicantDetails).subscribe();
-        
-        if(this.currentApplicantStatus == "selected"){
-          try{
-            this.memberService.createNewMember(this.applicantDetails).subscribe();
-          }catch(err) {}
-        }
-        this.close();
-    }
+    this.close();
+  }
 }
