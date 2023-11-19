@@ -48,3 +48,11 @@ export interface MemberRole {
   firstDateInRole: Date,
   lastDateInRole: Date
 }
+
+export type ApplicantStatus = "open" | "contacted" | "toBeInterviewed" | "interviewed" | "onHold" | "toBeRejected" | "rejected" | "candidateNotInterested" | "selected" | "duplicate";
+export type ApplicantStatusDisplay = "Open" | "Contacted" | "To Be Interviewed" | "Interviewed" | "On Hold" | "To Be Rejected" | "Rejected" | "Candidate Not Interested" | "Selected" | "Duplicate";
+
+export interface ApplicantStages {
+  value: ApplicantStatus;
+  displayValue: ApplicantStatusDisplay;
+}

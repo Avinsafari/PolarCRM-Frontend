@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RecruiterDetailComponent } from '../recruiter-detail/recruiter-detail.component';
 import { ApplicantData } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-recruitment',
@@ -51,5 +52,39 @@ export class RecruitmentComponent implements OnInit {
     dialogConfig.data = this.applicants[id];
 
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
+  }
+
+  transformStatusView(status: string): string {
+    
+    switch (status) {
+      case 'open':
+        return 'Open';
+      case 'contacted':
+        return 'Contacted';
+      case 'toBeInterviewed':
+        return 'To Be Interviewed';
+      case 'interviewed':
+        return 'Interviewed';
+      case 'onHold':
+        return 'On Hold';
+      case 'toBeRejected':
+        return 'To Be Rejected';
+      case 'rejected':
+        return 'Rejected';
+      case 'candidateNotInterested':
+        return 'Candidate Not Interested';
+      case 'selected':
+        return 'Selected';
+      case 'duplicate':
+        return 'Duplicate';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  transformSignupView(date: string): string {
+
+    let transformedDate2 = DateTime.fromISO(date);
+    return transformedDate2.toLocal().toLocaleString(DateTime.DATE_MED);
   }
 }
