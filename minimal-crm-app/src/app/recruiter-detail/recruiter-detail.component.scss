@@ -1,11 +1,9 @@
 .content {
     height: calc(100vh - 10rem);
-    width: 100%;
+    width: calc(100vw - 25rem);
     display: grid;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    grid-template-columns: 1.5fr 3fr 2.5fr 3fr;
-    grid-template-rows: repeat(13, 1fr);
+    margin: 20px;
+    grid-template-columns: 3fr 2fr 2fr;
     gap: 20px 60px;
 }
 
@@ -19,25 +17,21 @@
     justify-content: center;
 }
 
-.labels {
-    width: 100%;
-    p {
-        margin-left: 20px;
-        font-size: 16px;
+.characteristics {
+    display: flex;
+    justify-content: space-between;
+    color: #263238;
+    margin: 20px 0px;
+    a, span {
         padding: 5px;
     }
 }
 
 .infos {
-    width: 100%;
-    p, select {
-        margin-left: 20px;
-        font-size: 16px;
-        background-color: aliceblue;
-        padding: 5px;
-        border-radius: 10%;
-        width: 100%;
-    }
+    margin-left: auto;
+    background-color: aliceblue;
+    border-radius: 10px;
+    min-width: 15rem;
 }
 
 .changelog {

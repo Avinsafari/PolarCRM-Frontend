@@ -2,38 +2,28 @@
 
 <ng-template #content>
     <div class="content">
-        <div class="labels">
-            <p>Applicant ID: </p>
-            <p>First Name: </p>
-            <p>Family Name: </p>
-            <p>Local Committee: </p>
-            <p>Status: </p>
-            <p>Email: </p>
-            <p>Telephone Number: </p>
-            <p>Occupation: </p>
-            <p>German Level: </p>
-            <p>Recruitment Channel: </p>
-            <p>Motivation for joining: </p>
-            <p>CV: </p>
-            <p>LinkedIn: </p>
+        <div>
+            <span class="characteristics"><span>Applicant ID:</span><span class="infos">{{applicantDetails._id}}</span></span>
+            <span class="characteristics"><span>First Name:</span><span class="infos">{{applicantDetails.firstName}}</span></span>
+            <span class="characteristics"><span>Family Name:</span><span class="infos">{{applicantDetails.familyName}}</span></span>
+            <span class="characteristics"><span>Local Committee:</span><span class="infos">{{applicantDetails.lc}}</span></span>
+            <span class="characteristics">
+                <span>Status:</span>
+                <select style="min-width: 15.7rem;" class="infos" [(ngModel)]="currentApplicantStatus">
+                    <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
+                </select>
+            </span>
+            <span class="characteristics"><span>Email:</span><span class="infos">{{applicantDetails.email}}</span></span>
+            <span class="characteristics"><span>Telephone Number:</span><span class="infos">{{applicantDetails.telephone}}</span></span>
+            <span class="characteristics"><span>Occupation:</span><span class="infos">{{applicantDetails.occupation}}</span></span>
+            <span class="characteristics"><span>German Level:</span><span class="infos">{{applicantDetails.german}}</span></span>
+            <span class="characteristics"><span>Recruitment Channel:</span><span class="infos">{{applicantDetails.mktChannel}}</span></span>
+            <span class="characteristics"><span>Motivation for joining:</span><span class="infos">{{applicantDetails.motivation}}</span></span>
+            <span class="characteristics"><span>CV:</span><span class="infos">{{applicantDetails.cv}} None</span></span>
+            <span class="characteristics"><span>LinkedIn:</span><a class="infos" [href]="applicantDetails.linkedin">{{applicantDetails.linkedin}}</a></span>
+            <button (click)="saveApplicantChanges()">Save Changes</button>
         </div>
-        <div class="infos">
-            <p>{{applicantDetails._id}}</p>
-            <p>{{applicantDetails.firstName}}</p>
-            <p>{{applicantDetails.familyName}} </p>
-            <p>{{applicantDetails.lc}}</p>
-            <select [(ngModel)]="currentApplicantStatus">
-                <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
-            </select>
-            <p>{{applicantDetails.email}}</p>
-            <p>{{applicantDetails.telephone}} </p>
-            <p>{{applicantDetails.occupation}} </p>
-            <p>{{applicantDetails.german}}</p>
-            <p>{{applicantDetails.mktChannel}}</p>
-            <p>{{applicantDetails.motivation}}</p>
-            <p>{{applicantDetails.cv}} None </p>
-            <p><a [href]="applicantDetails.linkedin">{{applicantDetails.linkedin}}</a></p>
-        </div>
+
         <div class="changelog">
             <p class="header">Changelog: </p>
             <p>12.03.2023 - Status changed: Open </p>
@@ -47,9 +37,7 @@
                 <p *ngFor="let comment of applicantDetails?.comments" class="chatlog">{{comment}}</p>
                 <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
             </div>
-        </div>
-        <button (click)="saveApplicantChanges()">Save Changes</button>
-        
+        </div>        
     </div>
 </ng-template>
 
