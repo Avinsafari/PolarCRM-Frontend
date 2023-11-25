@@ -20,7 +20,7 @@ export interface ApplicantData extends UserData {
 export interface ApplicantDataDetail extends ApplicantData, UserDataDetail {
   occupation: string;
   german: string;
-  motivation: string;
+  motivation: string[];
   linkedin: string;
   cv?: string; 
   mktChannel: string;
@@ -55,4 +55,9 @@ export type ApplicantStatusDisplay = "Open" | "Contacted" | "To Be Interviewed" 
 export interface ApplicantStages {
   value: ApplicantStatus;
   displayValue: ApplicantStatusDisplay;
+}
+
+export interface MotivationForJoining {
+  value: string;
+  displayValue: string;
 }

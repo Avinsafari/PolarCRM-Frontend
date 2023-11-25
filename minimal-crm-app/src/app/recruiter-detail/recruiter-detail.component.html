@@ -18,7 +18,11 @@
             <span class="characteristics"><span>Occupation:</span><span class="infos">{{applicantDetails.occupation}}</span></span>
             <span class="characteristics"><span>German Level:</span><span class="infos">{{applicantDetails.german}}</span></span>
             <span class="characteristics"><span>Recruitment Channel:</span><span class="infos">{{applicantDetails.mktChannel}}</span></span>
-            <span class="characteristics"><span>Motivation for joining:</span><span class="infos">{{applicantDetails.motivation}}</span></span>
+            <span class="characteristics"><span>Motivation for joining:</span><span class="infos">
+                <ng-container *ngFor="let motivation of motivationForJoiningOptions; let i = index">
+                    <ng-container *ngIf="motivation.value === 'true'">{{motivation.displayValue}}<br/></ng-container>
+                </ng-container>
+            </span></span>
             <span class="characteristics"><span>CV:</span><span class="infos">{{applicantDetails.cv}} None</span></span>
             <span class="characteristics"><span>LinkedIn:</span><a class="infos" [href]="applicantDetails.linkedin">{{applicantDetails.linkedin}}</a></span>
             <button (click)="saveApplicantChanges()">Save Changes</button>

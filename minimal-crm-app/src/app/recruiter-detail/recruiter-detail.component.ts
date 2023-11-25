@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApplicantData, ApplicantDataDetail, ApplicantStages } from '../interfaces';
+import { ApplicantData, ApplicantDataDetail, ApplicantStages, MotivationForJoining } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MemberService } from '../member.service';
 
@@ -14,6 +14,7 @@ export class RecruiterDetailComponent implements OnInit {
   ready: boolean = false;
   comments: string[];
   newComment: string;
+  motivationForJoining: boolean[];
   applicantStages: ApplicantStages[] = [
     {value: 'open', displayValue: 'Open'},
     {value: 'contacted', displayValue: 'Contacted'},
@@ -26,6 +27,13 @@ export class RecruiterDetailComponent implements OnInit {
     {value: 'selected', displayValue: 'Selected'},
     {value: 'duplicate', displayValue: 'Duplicate'}
   ];
+  motivationForJoiningOptions: MotivationForJoining[] = [
+    {value: 'false', displayValue: 'Praktische Erfahrung'},
+    {value: 'false', displayValue: 'Globales Netzwerk'},
+    {value: 'false', displayValue: 'Soziale Verantwortung'},
+    {value: 'false', displayValue: 'Internationale Atmosphäre'}
+  ];
+
   currentApplicantStatus: string;
   applicantDetails: ApplicantDataDetail;
 
@@ -44,6 +52,10 @@ export class RecruiterDetailComponent implements OnInit {
     this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
       this.applicantDetails = applicantData;
       this.currentApplicantStatus = this.applicantDetails.status;
+      this.applicantDetails.motivation.map((motivation, index) => {
+        this.motivationForJoiningOptions[index].value = motivation;
+        console.log(motivation)
+      });
       this.ready = true;
     });
   }
