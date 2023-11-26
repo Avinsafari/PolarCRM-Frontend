@@ -17,6 +17,7 @@ export class MembersComponent implements OnInit{
   dataSource: MatTableDataSource<MemberData>;
   members: MemberData[] = [];
   memberCounter: number = 0;
+  filteredMembers: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -38,6 +39,7 @@ export class MembersComponent implements OnInit{
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.filteredMembers = this.dataSource.filteredData.length;
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
