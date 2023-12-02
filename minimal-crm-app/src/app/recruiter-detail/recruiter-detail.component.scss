@@ -20,7 +20,7 @@
 .characteristics {
     display: flex;
     justify-content: space-between;
-    color: #263238;
+    color: var(--primary-color);
     margin: 20px 0px;
     a, span {
         padding: 5px;
