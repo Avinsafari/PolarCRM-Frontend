@@ -2,15 +2,15 @@
     <h1>Recruitment - {{openCounter}} Open Applications</h1>
 
     <mat-card>
-        <!-- <div class="filter"> -->
+        <div class="filter">
             <mat-form-field>
                 <mat-label>Filter</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
             </mat-form-field>
-            <!-- <mat-chip-listbox> -->
-                <!-- <mat-chip-option>Archived Applicants</mat-chip-option> -->
-            <!-- </mat-chip-listbox> -->
-        <!-- </div> -->
+            <mat-chip-listbox>
+                <mat-chip-option [selected]="includeArchived" (selectionChange)="filterArchived($event)">Show Archived Applicants</mat-chip-option>
+            </mat-chip-listbox>
+        </div>
         <table mat-table [dataSource]="dataSource" matSort>
     
         <ng-container matColumnDef="id">

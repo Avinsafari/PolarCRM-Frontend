@@ -7,6 +7,7 @@ import { RecruiterDetailComponent } from '../recruiter-detail/recruiter-detail.c
 import { ApplicantData } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { DateTime } from 'luxon';
+import { MatChipSelectionChange } from '@angular/material/chips';
 
 @Component({
   selector: 'app-recruitment',
@@ -19,6 +20,7 @@ export class RecruitmentComponent implements OnInit {
   dataSource: MatTableDataSource<ApplicantData>;
   applicants: ApplicantData[] = [];
   openCounter: number = 0;
+  includeArchived: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,14 +28,18 @@ export class RecruitmentComponent implements OnInit {
   constructor(public dialog: MatDialog, private applicantService: ApplicantService) { }
 
   ngOnInit(): void {
-    this.applicantService.getApplicants().subscribe(applicants => {
+    this.fetchApplicants();
+    this.applicantService.getNumberOfOpens().subscribe(counter => {
+      this.openCounter = counter;
+    })
+  }
+
+  fetchApplicants() {
+    this.applicantService.getApplicants(this.includeArchived).subscribe(applicants => {
       this.applicants = applicants;
       this.dataSource = new MatTableDataSource(this.applicants);
       this.dataSource.paginator = this.paginator;
     });
-    this.applicantService.getNumberOfOpens().subscribe(counter => {
-      this.openCounter = counter;
-    })
   }
 
   applyFilter(event: Event) {
@@ -44,6 +50,12 @@ export class RecruitmentComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  filterArchived(event: MatChipSelectionChange) {
+    this.includeArchived = event.source.selected;
+    this.fetchApplicants();
+  }
+
 
   openDetails(id: number) {
     const dialogConfig = new MatDialogConfig();

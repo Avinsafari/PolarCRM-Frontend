@@ -10,7 +10,8 @@ export class ApplicantService {
     
     domain = "http://localhost:8000/applicants/";
     openCountUrl = this.domain + "open-count";
-    previewAllApplicantsUrl = this.domain + "preview";
+    previewAllApplicantsUrl = this.domain + "preview/all";
+    previewCurrentApplicantsUrl = this.domain + "preview/current";
     detailOneApplicantUrl = this.domain + "detail/";
     updateApplicantStatusUrl = this.domain + "update-status/";
 
@@ -20,8 +21,12 @@ export class ApplicantService {
         return this.http.get<number>(this.openCountUrl);
     }
 
-    getApplicants(): Observable<ApplicantData[]> {
-        return this.http.get<ApplicantData[]>(this.previewAllApplicantsUrl);
+    getApplicants(archived: boolean): Observable<ApplicantData[]> {
+        if(archived) {
+            return this.http.get<ApplicantData[]>(this.previewAllApplicantsUrl);
+        }else {
+            return this.http.get<ApplicantData[]>(this.previewCurrentApplicantsUrl);
+        }
     }
 
     getApplicantDetails(_id: number): Observable<ApplicantDataDetail> {
