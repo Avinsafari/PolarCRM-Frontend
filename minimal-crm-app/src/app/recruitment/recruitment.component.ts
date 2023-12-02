@@ -61,7 +61,7 @@ export class RecruitmentComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.data = this.applicants[id];
+    dialogConfig.data = id;
 
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
   }

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApplicantData, ApplicantDataDetail, ApplicantStages, MotivationForJoining } from '../interfaces';
+import { ApplicantDataDetail, ApplicantStages, MotivationForJoining } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MemberService } from '../member.service';
 
@@ -10,7 +10,6 @@ import { MemberService } from '../member.service';
   styleUrls: ['./recruiter-detail.component.scss']
 })
 export class RecruiterDetailComponent implements OnInit {
-  id: number;
   ready: boolean = false;
   comments: string[];
   newComment: string;
@@ -39,14 +38,12 @@ export class RecruiterDetailComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<RecruiterDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ApplicantData,
+    @Inject(MAT_DIALOG_DATA) public id: number,
     private applicantService: ApplicantService,
     private memberService: MemberService
   ) { }
 
   ngOnInit() {
-    this.id = this.data._id;
-    
     this.comments = [];
     this.newComment = "";
     this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
@@ -54,7 +51,6 @@ export class RecruiterDetailComponent implements OnInit {
       this.currentApplicantStatus = this.applicantDetails.status;
       this.applicantDetails.motivation.map((motivation, index) => {
         this.motivationForJoiningOptions[index].value = motivation;
-        console.log(motivation)
       });
       this.ready = true;
     });
