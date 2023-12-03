@@ -4,16 +4,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(14, 1fr);
+    padding: 20px;
     gap: 0px 50px;
-    margin: 10px 10px 0px 10px;
-}
-
-.loading {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .applicant-information {
@@ -106,4 +98,11 @@
         margin: 15px;
         font: 17px arial, sans-serif;
     }
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -47,7 +47,6 @@ export class RecruiterDetailComponent implements OnInit {
     this.comments = [];
     this.newComment = "";
     this.fetchApplicantDetails();
-    this.ready = true;
   }
 
   fetchApplicantDetails() {
@@ -58,6 +57,7 @@ export class RecruiterDetailComponent implements OnInit {
         this.applicantDetails.motivation.map((motivation, index) => {
           this.motivationForJoiningOptions[index].value = motivation;
         });
+        this.ready = true;
       });
     } catch (err) {
       console.log(err);
