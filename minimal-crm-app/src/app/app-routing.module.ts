@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { MembersComponent } from './members/members.component';
-import { GoalSettingComponent } from './goal-setting/goal-setting.component';
+import { PerformanceManagementComponent } from './performance-management/performance-management.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'recruitment', component: RecruitmentComponent},
   {path: 'members', component: MembersComponent},
-  {path: 'goal-setting', component: GoalSettingComponent},
+  {path: 'performance-management', component: PerformanceManagementComponent},
   {path: 'login', component: LoginComponent},
 ];
 

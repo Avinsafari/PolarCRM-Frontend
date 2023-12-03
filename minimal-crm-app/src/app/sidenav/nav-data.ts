@@ -15,8 +15,8 @@ export const navbarData = [
         label: 'Members'
     },
     {
-        routeLink: 'goal-setting',
+        routeLink: 'performance-management',
         icon: 'fal fa-chart-line',
-        label: 'Goal Setting'
+        label: 'Performance Management'
     }
 ];

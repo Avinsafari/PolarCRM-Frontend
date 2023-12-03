@@ -22,7 +22,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BodyComponent } from './body/body.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
-import { GoalSettingComponent } from './goal-setting/goal-setting.component';
+import { PerformanceManagementComponent } from './performance-management/performance-management.component';
 import { MembersComponent } from './members/members.component';
 import { RecruiterDetailComponent } from './recruiter-detail/recruiter-detail.component';
 import { LoginComponent } from './login/login.component';
@@ -35,7 +35,7 @@ import { MembersDetailComponent } from './members-detail/members-detail.componen
     DashboardComponent,
     BodyComponent,
     RecruitmentComponent,
-    GoalSettingComponent,
+    PerformanceManagementComponent,
     MembersComponent,
     RecruiterDetailComponent,
     LoginComponent,
