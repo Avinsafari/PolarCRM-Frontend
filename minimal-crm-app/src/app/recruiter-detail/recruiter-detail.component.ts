@@ -46,15 +46,24 @@ export class RecruiterDetailComponent implements OnInit {
   ngOnInit() {
     this.comments = [];
     this.newComment = "";
-    this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
-      this.applicantDetails = applicantData;
-      this.currentApplicantStatus = this.applicantDetails.status;
-      this.applicantDetails.motivation.map((motivation, index) => {
-        this.motivationForJoiningOptions[index].value = motivation;
-      });
-      this.ready = true;
-    });
+    this.fetchApplicantDetails();
+    this.ready = true;
   }
+
+  fetchApplicantDetails() {
+    try {
+      this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
+        this.applicantDetails = applicantData;
+        this.currentApplicantStatus = this.applicantDetails.status;
+        this.applicantDetails.motivation.map((motivation, index) => {
+          this.motivationForJoiningOptions[index].value = motivation;
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   close() {
     this.dialogRef.close();
     this.ready = false;

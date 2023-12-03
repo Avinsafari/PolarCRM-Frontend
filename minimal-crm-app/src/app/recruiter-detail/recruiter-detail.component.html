@@ -2,17 +2,11 @@
 
 <ng-template #content>
     <div class="content">
-        <div>
+        <div class="applicant-information">
             <span class="characteristics"><span>Applicant ID:</span><span class="infos">{{applicantDetails._id}}</span></span>
             <span class="characteristics"><span>First Name:</span><span class="infos">{{applicantDetails.firstName}}</span></span>
             <span class="characteristics"><span>Family Name:</span><span class="infos">{{applicantDetails.familyName}}</span></span>
             <span class="characteristics"><span>Local Committee:</span><span class="infos">{{applicantDetails.lc}}</span></span>
-            <span class="characteristics">
-                <span>Status:</span>
-                <select style="min-width: 15.7rem;" class="infos" [(ngModel)]="currentApplicantStatus">
-                    <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
-                </select>
-            </span>
             <span class="characteristics"><span>Email:</span><span class="infos">{{applicantDetails.email}}</span></span>
             <span class="characteristics"><span>Telephone Number:</span><span class="infos">{{applicantDetails.telephone}}</span></span>
             <span class="characteristics"><span>Occupation:</span><span class="infos">{{applicantDetails.occupation}}</span></span>
@@ -25,23 +19,84 @@
             </span></span>
             <span class="characteristics"><span>CV:</span><span class="infos">{{applicantDetails.cv}} None</span></span>
             <span class="characteristics"><span>LinkedIn:</span><a class="infos" [href]="applicantDetails.linkedin">{{applicantDetails.linkedin}}</a></span>
-            <button (click)="saveApplicantChanges()">Save Changes</button>
         </div>
 
-        <div class="changelog">
-            <p class="header">Changelog: </p>
+        <div class="comment-box">
+            <h3>Comment-Box</h3>
+            <div class="entries">
+                <!-- <span class="entry" *ngFor="entry in applicantDetails?.changelog">
+                    <span class="date">{{entry.date}}</span>&nbsp;
+                    <span class="change">{{entry.change}}</span>
+                </span> -->
             <p>12.03.2023 - Status changed: Open </p>
             <p>13.03.2023 - Status changed: Contacted </p>
             <p>14.03.2023 - Status changed: Interviewed </p>
             <p>15.03.2023 - Status changed: Accepted </p>
-        </div>
-        
-        <div class="chatbox">
-            <div id='chatborder'>
-                <p *ngFor="let comment of applicantDetails?.comments" class="chatlog">{{comment}}</p>
-                <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted 15.03.2023 - Status changed: Accepted 15.03.2023 - Status changed: Accepted</p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
             </div>
-        </div>        
+            <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+        </div>
+        <span class="status"><span>Stage:</span>
+            <select class="infos" [(ngModel)]="currentApplicantStatus">
+                <option *ngFor="let stage of applicantStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
+            </select>
+            <button (click)="saveApplicantChanges()">Save Stage</button>
+        </span>
     </div>
 </ng-template>
 
