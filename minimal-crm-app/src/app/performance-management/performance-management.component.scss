@@ -1,0 +1,15 @@
+mat-card {
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.member-nav {
+    width: 300px;
+    overflow: auto;
+}
+
+.member-performance {
+    width: auto;
+    overflow: auto;
+}

@@ -17,6 +17,6 @@ export const navbarData = [
     {
         routeLink: 'performance-management',
         icon: 'fal fa-chart-line',
-        label: 'Performance Management'
+        label: 'Performance'
     }
 ];

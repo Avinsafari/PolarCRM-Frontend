@@ -1,7 +1,21 @@
-<h1>Goal Setting</h1>
-<div class="card">
-    <div class="card-head">Lorem ipsum - dashboard</div>
-    <div class="card-body">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas ducimus soluta, quasi aut ipsa non, ullam enim rem repudiandae, vitae provident animi. Inventore rerum, voluptas optio dignissimos blanditiis modi illo!
+<h1>LC Management</h1>
+
+<mat-card>
+    <div class="member-nav">
+        <mat-selection-list
+            multiple="false"
+            hideSingleSelectionIndicator="true"
+            color="primary"
+        >
+            <ng-container *ngFor="let member of members">
+                <mat-list-option (click)="onMemberSelected(member._id)">
+                    {{member.firstName}}
+                </mat-list-option>
+                <mat-divider></mat-divider>
+            </ng-container>
+        </mat-selection-list>
     </div>
-</div>
+    <div class="member-performance">
+        <app-performance-management-details *ngIf="selectedMemberId" [member]="selectedMemberId"></app-performance-management-details>
+    </div>
+</mat-card>

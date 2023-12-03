@@ -14,7 +14,8 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { MembersComponent } from './members/members.component';
 import { RecruiterDetailComponent } from './recruiter-detail/recruiter-detail.component';
 import { LoginComponent } from './login/login.component';
 import { MembersDetailComponent } from './members-detail/members-detail.component';
+import { PerformanceManagementDetailsComponent } from './performance-management-details/performance-management-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { MembersDetailComponent } from './members-detail/members-detail.componen
     MembersComponent,
     RecruiterDetailComponent,
     LoginComponent,
-    MembersDetailComponent
+    MembersDetailComponent,
+    PerformanceManagementDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,9 @@ import { MembersDetailComponent } from './members-detail/members-detail.componen
     MatTreeModule,
     MatIconModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

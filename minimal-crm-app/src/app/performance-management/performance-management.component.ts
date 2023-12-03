@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MemberService } from '../member.service';
+import { MemberData } from '../interfaces';
 
 @Component({
   selector: 'app-performance-management',
@@ -7,4 +9,20 @@ import { Component } from '@angular/core';
 })
 export class PerformanceManagementComponent {
 
+  public includeArchived: boolean = false;
+  public members: MemberData[];
+  public selectedMemberId: number;
+
+  constructor(private memberService: MemberService) { }
+
+  ngOnInit(): void {
+    this.memberService.getMembers(this.includeArchived).subscribe(members => {
+      this.members = members;
+    });
+  }
+
+  onMemberSelected(memberId: number) {
+    if(this.selectedMemberId == memberId) { return };
+    this.selectedMemberId = memberId;
+  }
 }
