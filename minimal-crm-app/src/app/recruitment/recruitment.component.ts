@@ -100,9 +100,8 @@ export class RecruitmentComponent implements OnInit {
     }
   }
 
-  transformSignupView(date: string): string {
-
-    let transformedDate2 = DateTime.fromISO(date);
-    return transformedDate2.toLocal().toLocaleString(DateTime.DATE_MED);
+  transformDate(date: string): string {
+    let transformedDate = DateTime.fromISO(date);
+    return transformedDate.toLocal().toLocaleString(DateTime.DATE_MED);
   }
 }
