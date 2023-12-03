@@ -1,65 +1,56 @@
-<div class="content">
-    <div class="labels">
-        <p>Member ID: </p>
-        <p>First Name: </p>
-        <p>Family Name: </p>
-        <p>Local Committee: </p>
-        <p>Status: </p>
-        <p>Email: </p>
-        <p>Telephone Number: </p>
-        <p>Expa ID: </p>
-        <p>AIESEC Email: </p>
-        <p>Data Security Files: </p>
-        <p>Member Since: </p>
-        <p>Role: </p>
-        <p>Function: </p>
-        <p>Job Description: </p>
-        <p>In Role Since: </p>
-        <p>In Role Until: </p>
-        <p>Previous Roles: </p>
-    </div>
-    <div class="infos">
-        <p>{{memberDetails?._id}}</p>
-        <p>{{memberDetails?.firstName}}</p>
-        <p>{{memberDetails?.familyName}} </p>
-        <p>{{memberDetails?.lc}}</p>
-        <p>{{memberDetails?.status}}</p>
-        <select>
-            <option value="accepted">Accepted</option>
-            <option value="approved">Approved</option>
-            <option value="realized">Realized</option>
-            <option value="finished">Finished</option>
-            <option value="completed">Completed</option>
-            <option value="advanced">Advanced</option>
-            <option value="alumni">Alumni</option>
-        </select>
-        <p>{{memberDetails?.email}}</p>
-        <p>{{memberDetails?.telephone}} </p>
-        <p>{{memberDetails?.expaId}} </p>
-        <p>{{memberDetails?.aiesecEmail}}</p>
-        <p>{{memberDetails?.files}}</p>
-        <p>{{memberDetails?.createdAt}}</p>
-        <p>Newbie</p>
-        <p>TM</p>
-        <p>Recruiter</p>
-        <p>11.09.2023</p>
-        <p>11.03.2024</p>
-        <p>111</p>
-    </div>
-    <div class="changelog">
-        <p class="header">Changelog: </p>
-        <p>12.03.2023 - Status changed: Open </p>
-        <p>13.03.2023 - Status changed: Contacted </p>
-        <p>14.03.2023 - Status changed: Interviewed </p>
-        <p>15.03.2023 - Status changed: Accepted </p>
-    </div>
-    
-    <div class="chatbox">
-        <div id='chatborder'>
-            <p *ngFor="let comment of comments" class="chatlog">{{comment}}</p>
-            <input type="text" name="chat" id="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+<ng-container *ngIf="ready then content else loading"></ng-container>
+
+<ng-template #content>
+    <div class="content">
+        <div class="member-information">
+            <span class="characteristics"><span>Member ID: </span><span class="infos">{{memberDetails._id}}</span></span>
+            <span class="characteristics"><span>First Name: </span><span class="infos">{{memberDetails.firstName}}</span></span>
+            <span class="characteristics"><span>Family Name: </span><span class="infos">{{memberDetails.familyName}}</span></span>
+            <span class="characteristics"><span>Local Committee: </span><span class="infos">{{memberDetails.lc}}</span></span>
+            <span class="characteristics"><span>Email: </span><span class="infos">{{memberDetails.email}}</span></span>
+            <span class="characteristics"><span>Telephone Number: </span><span class="infos">{{memberDetails.telephone}}</span></span>
+            <span class="characteristics"><span>Expa ID: </span><span class="infos">{{memberDetails.expaId}}</span></span>
+            <span class="characteristics"><span>AIESEC Email: </span><span class="infos">{{memberDetails.aiesecEmail}}</span></span>
+            <!-- <span class="characteristics"><span>Data Security Files: </span><span class="infos">{{memberDetails?.files}}</span></span> -->
+            <span class="characteristics"><span>Member Since: </span><span class="infos">{{transformDate(memberDetails.createdAt)}}</span></span>
+            <span class="characteristics"><span>Function: </span><span class="infos">TM</span></span>
+            <span class="characteristics"><span>Role: </span><span class="infos">Newbie</span></span>
+            <span class="characteristics"><span>Term: </span><span class="infos">11.09.2023 &ndash; 11.03.2024</span></span>
+            <!-- <span class="characteristics"><span>Job Description: </span><span class="infos">Recruiter</span></span> -->
+            <!-- <span class="characteristics"><span>Previous Roles: </span><span class="infos">111</span></span> -->
         </div>
+        <div class="comment-box">
+            <h3>Comment-Box</h3>
+            <div class="entries">
+                <!-- <span class="entry" *ngFor="entry in memberDetails.changelog">
+                    <span class="date">{{entry.date}}</span>&nbsp;
+                    <span class="change">{{entry.change}}</span>
+                </span> -->
+            <p>12.03.2023 - Status changed: Open </p>
+            <p>13.03.2023 - Status changed: Contacted </p>
+            <p>14.03.2023 - Status changed: Interviewed </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+            <p>15.03.2023 - Status changed: Accepted 15.03.2023 - Status changed: Accepted 15.03.2023 - Status changed: Accepted</p>
+            <p>15.03.2023 - Status changed: Accepted </p>
+
+            </div>
+            <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
+        </div>
+        <span class="status"><span>Stage:</span>
+            <select class="infos" [(ngModel)]="currentMemberStatus">
+                <option *ngFor="let stage of memberStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
+            </select>
+            <button (click)="saveMemberChanges()">Update Member</button>
+        </span>
     </div>
-    <button (onclick)="saveMemberChanges()">Save Changes</button>
-    
-</div>
+</ng-template>
+
+<ng-template #loading>
+    <div class="loading">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

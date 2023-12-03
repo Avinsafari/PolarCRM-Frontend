@@ -57,6 +57,14 @@ export interface ApplicantStages {
   displayValue: ApplicantStatusDisplay;
 }
 
+export type MemberStatus = "accepted" | "approved" | "realized" | "finished" | "completed" | "dropped" | "terminated" | "advanced" | "alumni";
+export type MemberStatusDisplay = "Accepted" | "Approved" | "Realized" | "Finished" | "Completed" | "Dropped" | "Terminated" | "Advanced" | "Alumni";
+
+export interface MemberStages {
+  value: MemberStatus;
+  displayValue: MemberStatusDisplay;
+}
+
 export interface MotivationForJoining {
   value: string;
   displayValue: string;

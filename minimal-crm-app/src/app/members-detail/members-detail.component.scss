@@ -1,77 +1,108 @@
+@import '../../variables.scss';
+
 .content {
-    height: calc(100vh - 10rem);
-    width: 100%;
     display: grid;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    grid-template-columns: 1.5fr 3fr 2.5fr 3fr;
-    grid-template-rows: repeat(13, 1fr);
-    gap: 20px 60px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(14, 1fr);
+    padding: 20px;
+    gap: 0px 50px;
 }
 
-.labels {
-    width: 100%;
-    p {
-        margin-left: 20px;
-        font-size: 16px;
+.member-information {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 12;
+}
+
+.characteristics {
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-color);
+    margin: 20px 0px;
+    a, span {
         padding: 5px;
+        overflow: hidden;
+    }
+}
+
+.status {
+    grid-column: 1 / span 1;
+    grid-row: 13 / span 2;
+    display: flex;
+    align-items: center;
+    border: 3px solid var(--primary-color);
+    border-radius: $box-border-radius;
+    span {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px;
+    }
+    select {
+        padding: 10px;
+    }
+    select:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        cursor: pointer;
+    }
+
+    button {
+        margin-left: auto;
+        margin-right: 15px;
+        border-radius: $box-border-radius;
+        padding: 10px;
+        background-color: var(--secondary-color);
+    }
+
+    button:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        cursor: pointer;
     }
 }
 
 .infos {
-    width: 100%;
-    p, select {
-        margin-left: 20px;
-        font-size: 16px;
-        background-color: aliceblue;
-        padding: 5px;
-        border-radius: 10%;
-        width: 100%;
-    }
+    margin-left: auto;
+    background-color: var(--secondary-color);
+    border-radius: $box-border-radius;
+    max-width: 20rem;
+    min-width: 20rem;
 }
 
-.changelog {
-    border-radius: 6%;
-    border-color: aliceblue;
-    border-style: double;
-    margin: 10px;
-    .header {
-        font-size: 15px;
-        margin: 25px;
+.comment-box {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 14;
+    display: flex;
+    flex-direction: column;
+    border-radius: $box-border-radius;
+    border: 3px solid var(--primary-color);
+    background-color: var(--secondary-color);
+
+    h3, p {
+        margin-left: 10px;
+    }
+
+    .entries {
+        overflow: auto;
+        // flex: 1 1 auto;
+        max-height: 65vh;
     }
 
     p {
         margin: 0px 5px;
     }
-}
-  
-  #chatborder {
-    border-style: solid;
-    background-color: #f6f9f6;
-    border-width: 3px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    padding-right: 20px;
-    padding-left: 15px;
-    border-radius: 15px;
-  }
-  
-  .chatlog {
-     font: 15px arial, sans-serif;
-  }
-  
-  #chatbox {
-    font: 17px arial, sans-serif;
-    height: 22px;
-    width: 100%;
-  }
 
-button {
-    background-color: aliceblue;
-    padding: 10px;
-    margin: 20px;
+    .chatbox {
+        align-self: center;
+        border-radius: $box-border-radius;
+        width: 90%;
+        margin: 15px;
+        font: 17px arial, sans-serif;
+    }
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
