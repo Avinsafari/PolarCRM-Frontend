@@ -70,4 +70,30 @@ export class MembersComponent implements OnInit{
 
     this.dialog.open(MembersDetailComponent, dialogConfig);
   }
+
+  transformStatusView(status: string): string {
+    
+    switch (status) {
+      case 'accepted':
+        return 'Accepted';
+      case 'approved':
+        return 'Approved';
+      case 'realized':
+        return 'Realized';
+      case 'finished':
+        return 'Finished';
+      case 'completed':
+        return 'Completed';
+      case 'dropped':
+        return 'Dropped';
+      case 'terminated':
+        return 'Terminated';
+      case 'advanced':
+        return 'Advanced';
+      case 'alumni':
+        return 'Alumni';
+      default:
+        return 'Unknown';
+    }
+  }
 }
