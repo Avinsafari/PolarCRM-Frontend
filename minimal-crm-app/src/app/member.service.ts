@@ -9,26 +9,34 @@ import { Observable } from "rxjs";
 export class MemberService {
 
   domain = "http://localhost:8000/members/";
-  memberCountUrl = "count";
-  previewAllMembersUrl = "preview";
-  detailOneMemberUrl = "detail/";
-  createNewMemberUrl = "new";
+  memberCountUrl = this.domain + "count";
+  previewAllMembersUrl = this.domain + "preview/all";
+  previewCurrentMembersUrl = this.domain + "preview/current";
+  detailOneMemberUrl = this.domain + "detail/";
+  createNewMemberUrl = this.domain + "new";
 
   constructor(private http: HttpClient){}
 
   getNumberOfMembers(): Observable<number> {
-    return this.http.get<number>(this.domain + this.memberCountUrl);
+    return this.http.get<number>(this.memberCountUrl);
   }
 
-  getMembers(): Observable<MemberData[]> {
-    return this.http.get<MemberData[]>(this.domain + this.previewAllMembersUrl);
+  getMembers(archived: boolean): Observable<MemberData[]> {
+    if(archived) {
+      return this.http.get<MemberData[]>(this.previewAllMembersUrl);
+    }else {
+      return this.http.get<MemberData[]>(this.previewCurrentMembersUrl);
+    }
   }
 
   getMemberDetails(_id: number): Observable<MemberDataDetail> {
-    return this.http.get<MemberDataDetail>(this.domain + this.detailOneMemberUrl + _id.toString(), { headers: {'Access-Control-Allow-Origin': '*'}});
+    return this.http.get<MemberDataDetail>(
+      this.detailOneMemberUrl + _id.toString(), 
+      { headers: {'Access-Control-Allow-Origin': '*'}}
+    );
   }
 
   createNewMember(member: ApplicantDataDetail): Observable<MemberDataDetail>{
-    return this.http.post<MemberDataDetail>(this.domain + this.createNewMemberUrl, member);
+    return this.http.post<MemberDataDetail>(this.createNewMemberUrl, member);
   }
 }

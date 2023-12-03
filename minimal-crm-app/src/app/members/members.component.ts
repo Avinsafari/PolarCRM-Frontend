@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MemberData } from '../interfaces';
 import { MembersDetailComponent } from '../members-detail/members-detail.component';
 import { MemberService } from '../member.service';
+import { MatChipSelectionChange } from '@angular/material/chips';
 
 @Component({
   selector: 'app-members',
@@ -18,22 +19,30 @@ export class MembersComponent implements OnInit{
   members: MemberData[] = [];
   memberCounter: number = 0;
   filteredMembers: number = 0;
+  includeArchived: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, private memberService: MemberService) {
-  }
+  constructor(public dialog: MatDialog, private memberService: MemberService) { }
 
   ngOnInit(): void {
-    this.memberService.getMembers().subscribe(members => {
-      this.members = members;
-      this.dataSource = new MatTableDataSource(this.members);
-      this.dataSource.paginator = this.paginator;
-    });
+    this.fetchMembers();
     this.memberService.getNumberOfMembers().subscribe(counter => {
       this.memberCounter = counter;
     })
+  }
+
+  fetchMembers() {
+    try {
+      this.memberService.getMembers(this.includeArchived).subscribe(members => {
+        this.members = members;
+        this.dataSource = new MatTableDataSource(this.members);
+        this.dataSource.paginator = this.paginator;
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   applyFilter(event: Event) {
@@ -46,13 +55,19 @@ export class MembersComponent implements OnInit{
     }
   }
 
+  filterArchived(event: MatChipSelectionChange) {
+    this.includeArchived = event.source.selected;
+    this.fetchMembers();
+  }
+
   openDetails(id: number) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.data = this.members[id];
+    dialogConfig.data = id;
+    dialogConfig.width = '80vw';
+    dialogConfig.height = '80vh';
 
     this.dialog.open(MembersDetailComponent, dialogConfig);
   }
-
 }
