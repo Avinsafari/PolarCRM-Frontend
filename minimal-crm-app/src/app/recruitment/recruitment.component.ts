@@ -35,11 +35,15 @@ export class RecruitmentComponent implements OnInit {
   }
 
   fetchApplicants() {
-    this.applicantService.getApplicants(this.includeArchived).subscribe(applicants => {
-      this.applicants = applicants;
-      this.dataSource = new MatTableDataSource(this.applicants);
-      this.dataSource.paginator = this.paginator;
-    });
+    try {
+      this.applicantService.getApplicants(this.includeArchived).subscribe(applicants => {
+        this.applicants = applicants;
+        this.dataSource = new MatTableDataSource(this.applicants);
+        this.dataSource.paginator = this.paginator;
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   applyFilter(event: Event) {
@@ -62,6 +66,8 @@ export class RecruitmentComponent implements OnInit {
 
     dialogConfig.autoFocus = true;
     dialogConfig.data = id;
+    dialogConfig.width = '80vw';
+    dialogConfig.height = '80vh';
 
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
   }
