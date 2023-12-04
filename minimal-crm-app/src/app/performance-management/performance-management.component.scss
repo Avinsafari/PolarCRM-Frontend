@@ -4,12 +4,35 @@ mat-card {
     flex-direction: row;
 }
 
+mat-list-option:hover {
+    background-color: var(--tertiary-color);
+    cursor: pointer;
+}
+
 .member-nav {
     width: 300px;
     overflow: auto;
 }
 
 .member-performance {
-    width: auto;
+    flex-grow: 1; 
     overflow: auto;
+}
+
+.lc-info {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    height: calc(100% - 20px - 20px);
+    width: calc(100% - 20px - 20px);
+}
+
+.loading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

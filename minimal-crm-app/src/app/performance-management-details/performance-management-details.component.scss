@@ -1,0 +1,36 @@
+$tab-padding: 20px;
+$tab-margin: 18px;
+
+.main {
+    height: 100%;
+}
+
+mat-tab-group {
+    padding: 10px;
+    height: calc(100% - 20px);
+}
+
+:host ::ng-deep .mat-mdc-tab-body-wrapper{
+    flex-grow: 1;
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.base {
+    display: flex;
+    flex-direction: column;
+    margin: $tab-margin;
+    padding: $tab-padding;
+    border-radius: 8px;
+    height: calc(100% - 2*$tab-margin - 2*$tab-padding);
+    width: calc(100% - 2*$tab-margin - 2*$tab-padding);
+}
+
+.panel-line {
+    display: block
+}

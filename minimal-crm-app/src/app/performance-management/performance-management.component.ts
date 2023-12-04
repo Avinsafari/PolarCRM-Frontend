@@ -12,12 +12,14 @@ export class PerformanceManagementComponent {
   public includeArchived: boolean = false;
   public members: MemberData[];
   public selectedMemberId: number;
+  public ready: boolean = false;
 
   constructor(private memberService: MemberService) { }
 
   ngOnInit(): void {
     this.memberService.getMembers(this.includeArchived).subscribe(members => {
       this.members = members;
+      this.ready = true;
     });
   }
 
