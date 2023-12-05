@@ -36,32 +36,11 @@
         font-weight: bold;
         padding: 10px;
     }
-    select {
-        padding: 10px;
-    }
-    select:hover {
-        background-color: var(--primary-color);
-        color: var(--secondary-color);
-        cursor: pointer;
-    }
-
-    button {
-        margin-left: auto;
-        margin-right: 15px;
-        border-radius: $box-border-radius;
-        padding: 10px;
-        background-color: var(--secondary-color);
-    }
-
-    button:hover {
-        background-color: var(--primary-color);
-        color: var(--secondary-color);
-        cursor: pointer;
-    }
 }
 
 .infos {
     margin-left: auto;
+    margin-right: 15px;
     background-color: var(--secondary-color);
     border-radius: $box-border-radius;
     max-width: 20rem;

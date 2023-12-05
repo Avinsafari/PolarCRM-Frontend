@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MemberDataDetail, MemberStages } from '../interfaces';
+import { MemberDataDetail } from '../interfaces';
 import { MemberService } from '../member.service';
 import { DateTime } from 'luxon';
 
@@ -15,19 +15,8 @@ export class MembersDetailComponent implements OnInit {
   form: FormGroup;
   comments: string[];
   newComment: string;
-  currentMemberStatus: string;
   memberDetails: MemberDataDetail;
-  memberStages: MemberStages[] = [
-    {value: 'accepted', displayValue: 'Accepted'},
-    {value: 'approved', displayValue: 'Approved'},
-    {value: 'realized', displayValue: 'Realized'},
-    {value: 'finished', displayValue: 'Finished'},
-    {value: 'completed', displayValue: 'Completed'},
-    {value: 'dropped', displayValue: 'Dropped'},
-    {value: 'terminated', displayValue: 'Terminated'},
-    {value: 'advanced', displayValue: 'Advanced'},
-    {value: 'alumni', displayValue: 'Alumni'}
-  ];
+  
 
   constructor(
       private fb: FormBuilder,
@@ -50,7 +39,6 @@ export class MembersDetailComponent implements OnInit {
     try {
       this.memberService.getMemberDetails(this.id).subscribe(memberData => {
         this.memberDetails = memberData;
-        this.currentMemberStatus = this.memberDetails.status;
         this.ready = true;
       });
     } catch (error) {
@@ -74,12 +62,34 @@ export class MembersDetailComponent implements OnInit {
     }
   }
 
-  saveMemberChanges() {
-
-  }
-
   transformDate(date: any): string{
     let transformedDate = DateTime.fromISO(date);
     return transformedDate.toLocal().toLocaleString(DateTime.DATE_MED);
+  }
+
+  transformStatusView(status: string): string {
+    
+    switch (status) {
+      case 'accepted':
+        return 'Accepted';
+      case 'approved':
+        return 'Approved';
+      case 'realized':
+        return 'Realized';
+      case 'finished':
+        return 'Finished';
+      case 'completed':
+        return 'Completed';
+      case 'dropped':
+        return 'Dropped';
+      case 'terminated':
+        return 'Terminated';
+      case 'advanced':
+        return 'Advanced';
+      case 'alumni':
+        return 'Alumni';
+      default:
+        return 'Unknown';
+    }
   }
 }

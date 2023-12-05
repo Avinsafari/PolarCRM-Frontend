@@ -37,12 +37,7 @@
             </div>
             <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
         </div>
-        <span class="status"><span>Stage:</span>
-            <select class="infos" [(ngModel)]="currentMemberStatus">
-                <option *ngFor="let stage of memberStages" [ngValue]="stage.value">{{stage.displayValue}}</option>
-            </select>
-            <button (click)="saveMemberChanges()">Update Member</button>
-        </span>
+        <span class="status"><span>Stage: </span><span class="infos">{{transformStatusView(memberDetails.status)}}</span></span>
     </div>
 </ng-template>
 

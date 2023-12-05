@@ -20,7 +20,7 @@
         </mat-selection-list>
     </div>
     <div class="member-performance">
-        <app-performance-management-details *ngIf="selectedMemberId" [member]="selectedMemberId"></app-performance-management-details>
+        <app-performance-management-details *ngIf="selectedMemberId" [memberId]="selectedMemberId"></app-performance-management-details>
         <div class="lc-info" *ngIf="!selectedMemberId">
             <h2>Select a member to see his/her performance</h2>
             <span>Current Number of Members in LC:</span>
