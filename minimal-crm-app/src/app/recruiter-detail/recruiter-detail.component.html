@@ -23,70 +23,11 @@
         <div class="comment-box">
             <h3>Comment-Box</h3>
             <div class="entries">
-                <!-- <span class="entry" *ngFor="entry in applicantDetails?.comments">
-                    <span class="date">{{entry.date}}</span>&nbsp;
-                    <span class="change">{{entry.change}}</span>
-                </span> -->
-            <p>12.03.2023 - Status changed: Open </p>
-            <p>13.03.2023 - Status changed: Contacted </p>
-            <p>14.03.2023 - Status changed: Interviewed </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted 15.03.2023 - Status changed: Accepted 15.03.2023 - Status changed: Accepted</p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
-            <p>15.03.2023 - Status changed: Accepted </p>
+                <p class="entry" [ngClass]="entry.userTyped ? 'manual' : 'automatic'" *ngFor="let entry of applicantDetails?.comments">
+                    <span>{{transformDateAndTime(entry.changedAt)}}:</span>
+                    &nbsp;&ndash;&nbsp;
+                    <span>{{entry.entry}}</span>
+                </p>
             </div>
             <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
         </div>

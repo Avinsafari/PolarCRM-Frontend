@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApplicantDataDetail, ApplicantStages, MotivationForJoining } from '../interfaces';
+import { ApplicantDataDetail, ApplicantStages, Comment, MotivationForJoining } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MemberService } from '../member.service';
+import { DatetimeService } from '../datetime.service';
 
 @Component({
   selector: 'app-recruiter-detail',
@@ -27,20 +28,20 @@ export class RecruiterDetailComponent implements OnInit {
     {value: 'duplicate', displayValue: 'Duplicate'}
   ];
   motivationForJoiningOptions: MotivationForJoining[] = [
-    {value: 'false', displayValue: 'Praktische Erfahrung'},
-    {value: 'false', displayValue: 'Globales Netzwerk'},
-    {value: 'false', displayValue: 'Soziale Verantwortung'},
-    {value: 'false', displayValue: 'Internationale Atmosphäre'}
+    {value: 'false', displayValue: 'Persönliche und berufliche Entwicklung'},
+    {value: 'false', displayValue: 'Internationales Netzwerk'},
+    {value: 'false', displayValue: 'Beitrag zur interkulturellen Verständigung'},
   ];
 
-  currentApplicantStage: string;
+  currentApplicantStage: string | undefined;
   applicantDetails: ApplicantDataDetail;
 
   constructor(
     private dialogRef: MatDialogRef<RecruiterDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public id: number,
     private applicantService: ApplicantService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private datetimeService: DatetimeService
   ) { }
 
   ngOnInit() {
@@ -53,7 +54,9 @@ export class RecruiterDetailComponent implements OnInit {
     try {
       this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
         this.applicantDetails = applicantData;
-        this.currentApplicantStage = this.applicantDetails.stage;
+        console.log(this.applicantDetails)
+        this.currentApplicantStage = this.applicantStages
+        .find(stage => stage.value === this.applicantDetails.stage)?.displayValue;
         this.applicantDetails.motivation.map((motivation, index) => {
           this.motivationForJoiningOptions[index].value = motivation;
         });
@@ -70,13 +73,30 @@ export class RecruiterDetailComponent implements OnInit {
   }
   addComment() {
     if (this.newComment != "") {
-      // this.applicantDetails?.comments.push(this.newComment);
+      const newComment: Comment = {
+        changedAt: new Date(),
+        entry: this.newComment,
+        userTyped: true
+      };
+      this.applicantDetails?.comments.push(newComment);
+      this.applicantService.updateApplicant(this.applicantDetails)
+      .subscribe(updatedComments => {
+        this.applicantDetails.comments = updatedComments.comments;
+      });
       this.newComment = "";
     }
   }
   saveApplicantChanges() {
-    this.applicantDetails.stage = this.currentApplicantStage;
-    this.applicantService.updateApplicantStage(this.applicantDetails).subscribe();
+    const oldStage = this.applicantDetails.stage;
+    this.applicantDetails.stage = this.currentApplicantStage as string;
+    const entry = `Updated: ${oldStage} to ${this.currentApplicantStage}`
+    const newComment: Comment = {
+      changedAt: new Date(),
+      entry: entry,
+      userTyped: false
+    };
+    this.applicantDetails.comments.push(newComment);
+    this.applicantService.updateApplicant(this.applicantDetails).subscribe();
     
     if(this.currentApplicantStage == "selected"){
       try{
@@ -84,5 +104,9 @@ export class RecruiterDetailComponent implements OnInit {
       }catch(err) {}
     }
     this.close();
+  }
+
+  transformDateAndTime(date: any): string {
+    return this.datetimeService.transformDateAndTime(date);
   }
 }
