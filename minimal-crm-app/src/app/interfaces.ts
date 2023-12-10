@@ -1,20 +1,25 @@
+export interface Comment {
+  changedAt: Date;
+  entry: string;
+  userTyped: boolean;
+}
+
 export interface UserData {
   _id: number;
+  createdAt: Date;
   lc: string;
   firstName: string;
   familyName: string;
-  createdAt: Date;
 }
 
 export interface UserDataDetail {
   email: string;
   telephone: number;
-  changelog: string[];
-  comments: string[];
+  comments: Comment[];
 }
 
 export interface ApplicantData extends UserData {
-  status: string;
+  stage: string;
 }
   
 export interface ApplicantDataDetail extends ApplicantData, UserDataDetail {
@@ -22,14 +27,12 @@ export interface ApplicantDataDetail extends ApplicantData, UserDataDetail {
   german: string;
   motivation: string[];
   linkedin: string;
-  cv?: string; 
   mktChannel: string;
-  team: string;
 }
 
 export interface MemberData extends UserData {
-  status: string;
-  roleCurrent: MemberRole;
+  stage: string;
+  currentRole: MemberRole;
   membershipVerified: boolean;
 }
 
@@ -37,32 +40,34 @@ export interface MemberDataDetail extends MemberData, UserDataDetail {
   aiesecEmail: string;
   expaId: number;
   dateJoined: Date;
-  rolePast?: MemberRole[];
+  pastRole?: MemberRole[];
   files?: string;
 }
 
 export interface MemberRole {
   role: string,
   function: string,
-  jobDescription: string,
+  jobDescription?: string,
   firstDateInRole: Date,
-  lastDateInRole: Date
+  lastDateInRole?: Date,
+  dateOfRealized?: Date,
+  endOfTerm?: Date
 }
 
-export type ApplicantStatus = "open" | "contacted" | "toBeInterviewed" | "interviewed" | "onHold" | "toBeRejected" | "rejected" | "candidateNotInterested" | "selected" | "duplicate";
-export type ApplicantStatusDisplay = "Open" | "Contacted" | "To Be Interviewed" | "Interviewed" | "On Hold" | "To Be Rejected" | "Rejected" | "Candidate Not Interested" | "Selected" | "Duplicate";
+export type ApplicantStage = "open" | "contacted" | "toBeInterviewed" | "interviewed" | "onHold" | "toBeRejected" | "rejected" | "candidateNotInterested" | "selected" | "duplicate";
+export type ApplicantStageDisplay = "Open" | "Contacted" | "To Be Interviewed" | "Interviewed" | "On Hold" | "To Be Rejected" | "Rejected" | "Candidate Not Interested" | "Selected" | "Duplicate";
 
 export interface ApplicantStages {
-  value: ApplicantStatus;
-  displayValue: ApplicantStatusDisplay;
+  value: ApplicantStage;
+  displayValue: ApplicantStageDisplay;
 }
 
-export type MemberStatus = "accepted" | "approved" | "realized" | "finished" | "completed" | "dropped" | "terminated" | "advanced" | "alumni";
-export type MemberStatusDisplay = "Accepted" | "Approved" | "Realized" | "Finished" | "Completed" | "Dropped" | "Terminated" | "Advanced" | "Alumni";
+export type MemberStage = "accepted" | "approved" | "realized" | "finished" | "completed" | "dropped" | "terminated" | "advanced" | "alumni";
+export type MemberStageDisplay = "Accepted" | "Approved" | "Realized" | "Finished" | "Completed" | "Dropped" | "Terminated" | "Advanced" | "Alumni";
 
 export interface MemberStages {
-  value: MemberStatus;
-  displayValue: MemberStatusDisplay;
+  value: MemberStage;
+  displayValue: MemberStageDisplay;
 }
 
 export interface MotivationForJoining {

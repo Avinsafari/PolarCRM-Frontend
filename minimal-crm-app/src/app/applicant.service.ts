@@ -13,7 +13,7 @@ export class ApplicantService {
     previewAllApplicantsUrl = this.domain + "preview/all";
     previewCurrentApplicantsUrl = this.domain + "preview/current";
     detailOneApplicantUrl = this.domain + "detail/";
-    updateApplicantStatusUrl = this.domain + "update-status/";
+    updateApplicantStageUrl = this.domain + "update-stage/";
 
     constructor(private http: HttpClient){}
 
@@ -33,7 +33,7 @@ export class ApplicantService {
         return this.http.get<ApplicantDataDetail>(this.detailOneApplicantUrl + _id.toString(), { headers: {'Access-Control-Allow-Origin': '*'}});
     }
 
-    updateApplicantStatus(applicant: ApplicantDataDetail): Observable<ApplicantDataDetail> {
-        return this.http.put<ApplicantDataDetail>(this.updateApplicantStatusUrl, applicant, { headers: {'Access-Control-Allow-Origin': '*'}});
+    updateApplicantStage(applicant: ApplicantDataDetail): Observable<ApplicantDataDetail> {
+        return this.http.put<ApplicantDataDetail>(this.updateApplicantStageUrl, applicant, { headers: {'Access-Control-Allow-Origin': '*'}});
     }
 }

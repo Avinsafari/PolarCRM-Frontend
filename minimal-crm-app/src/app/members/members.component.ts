@@ -14,7 +14,7 @@ import { MatChipSelectionChange } from '@angular/material/chips';
   styleUrls: ['./members.component.scss']
 })
 export class MembersComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'status', 'role-current', 'team-current', 'membership-verified'];
+  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'stage', 'role-current', 'team-current', 'membership-verified'];
   dataSource: MatTableDataSource<MemberData>;
   members: MemberData[] = [];
   memberCounter: number = 0;
@@ -71,9 +71,9 @@ export class MembersComponent implements OnInit{
     this.dialog.open(MembersDetailComponent, dialogConfig);
   }
 
-  transformStatusView(status: string): string {
+  transformStageView(stage: string): string {
     
-    switch (status) {
+    switch (stage) {
       case 'accepted':
         return 'Accepted';
       case 'approved':

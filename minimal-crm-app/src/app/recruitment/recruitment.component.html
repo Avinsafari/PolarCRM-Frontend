@@ -29,9 +29,9 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Family Name </th>
             <td mat-cell *matCellDef="let row"> {{row.familyName}} </td>
         </ng-container>
-        <ng-container matColumnDef="status">
+        <ng-container matColumnDef="stage">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Stage </th>
-            <td mat-cell *matCellDef="let row"> {{transformStatusView(row.status)}} </td>
+            <td mat-cell *matCellDef="let row"> {{transformStageView(row.stage)}} </td>
         </ng-container>
         <ng-container matColumnDef="signup-date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Signed Up </th>

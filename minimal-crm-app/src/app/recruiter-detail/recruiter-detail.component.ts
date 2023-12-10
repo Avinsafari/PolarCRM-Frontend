@@ -33,7 +33,7 @@ export class RecruiterDetailComponent implements OnInit {
     {value: 'false', displayValue: 'Internationale Atmosphäre'}
   ];
 
-  currentApplicantStatus: string;
+  currentApplicantStage: string;
   applicantDetails: ApplicantDataDetail;
 
   constructor(
@@ -53,7 +53,7 @@ export class RecruiterDetailComponent implements OnInit {
     try {
       this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
         this.applicantDetails = applicantData;
-        this.currentApplicantStatus = this.applicantDetails.status;
+        this.currentApplicantStage = this.applicantDetails.stage;
         this.applicantDetails.motivation.map((motivation, index) => {
           this.motivationForJoiningOptions[index].value = motivation;
         });
@@ -70,15 +70,15 @@ export class RecruiterDetailComponent implements OnInit {
   }
   addComment() {
     if (this.newComment != "") {
-      this.applicantDetails?.comments.push(this.newComment);
+      // this.applicantDetails?.comments.push(this.newComment);
       this.newComment = "";
     }
   }
   saveApplicantChanges() {
-    this.applicantDetails.status = this.currentApplicantStatus;
-    this.applicantService.updateApplicantStatus(this.applicantDetails).subscribe();
+    this.applicantDetails.stage = this.currentApplicantStage;
+    this.applicantService.updateApplicantStage(this.applicantDetails).subscribe();
     
-    if(this.currentApplicantStatus == "selected"){
+    if(this.currentApplicantStage == "selected"){
       try{
         this.memberService.createNewMember(this.applicantDetails).subscribe();
       }catch(err) {}

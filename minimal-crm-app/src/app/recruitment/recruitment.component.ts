@@ -16,7 +16,7 @@ import { MatChipSelectionChange } from '@angular/material/chips';
 })
 
 export class RecruitmentComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'status', 'signup-date'];
+  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'stage', 'signup-date'];
   dataSource: MatTableDataSource<ApplicantData>;
   applicants: ApplicantData[] = [];
   openCounter: number = 0;
@@ -72,9 +72,9 @@ export class RecruitmentComponent implements OnInit {
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
   }
 
-  transformStatusView(status: string): string {
+  transformStageView(stage: string): string {
     
-    switch (status) {
+    switch (stage) {
       case 'open':
         return 'Open';
       case 'contacted':

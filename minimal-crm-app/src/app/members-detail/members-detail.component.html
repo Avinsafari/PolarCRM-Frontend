@@ -19,7 +19,7 @@
         <div class="comment-box">
             <h3>Comment-Box</h3>
             <div class="entries">
-                <!-- <span class="entry" *ngFor="entry in memberDetails.changelog">
+                <!-- <span class="entry" *ngFor="entry in memberDetails.comments">
                     <span class="date">{{entry.date}}</span>&nbsp;
                     <span class="change">{{entry.change}}</span>
                 </span> -->
@@ -37,7 +37,7 @@
             </div>
             <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
         </div>
-        <span class="status"><span>Stage: </span><span class="infos">{{transformStatusView(memberDetails.status)}}</span></span>
+        <span class="stage"><span>Stage: </span><span class="infos">{{transformStageView(memberDetails.stage)}}</span></span>
     </div>
 </ng-template>
 

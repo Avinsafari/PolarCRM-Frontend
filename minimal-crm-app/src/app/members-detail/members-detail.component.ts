@@ -67,9 +67,9 @@ export class MembersDetailComponent implements OnInit {
     return transformedDate.toLocal().toLocaleString(DateTime.DATE_MED);
   }
 
-  transformStatusView(status: string): string {
+  transformStageView(stage: string): string {
     
-    switch (status) {
+    switch (stage) {
       case 'accepted':
         return 'Accepted';
       case 'approved':
