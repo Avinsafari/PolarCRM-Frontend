@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MemberDataDetail } from '../interfaces';
 import { MemberService } from '../member.service';
-import { DateTime } from 'luxon';
+import { DatetimeService } from '../datetime.service';
 
 @Component({
   selector: 'app-members-detail',
@@ -22,7 +22,8 @@ export class MembersDetailComponent implements OnInit {
       private fb: FormBuilder,
       private dialogRef: MatDialogRef<MembersDetailComponent>,
       @Inject(MAT_DIALOG_DATA) public id: number,
-      private memberService: MemberService
+      private memberService: MemberService,
+      private datetimeService: DatetimeService
     ) { }
 
   ngOnInit() {
@@ -63,8 +64,7 @@ export class MembersDetailComponent implements OnInit {
   }
 
   transformDate(date: any): string{
-    let transformedDate = DateTime.fromISO(date);
-    return transformedDate.toLocal().toLocaleString(DateTime.DATE_MED);
+    return this.datetimeService.transformDate(date);
   }
 
   transformStageView(stage: string): string {

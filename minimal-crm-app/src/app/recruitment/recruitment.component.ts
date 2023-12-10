@@ -6,8 +6,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RecruiterDetailComponent } from '../recruiter-detail/recruiter-detail.component';
 import { ApplicantData } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
-import { DateTime } from 'luxon';
 import { MatChipSelectionChange } from '@angular/material/chips';
+import { DatetimeService } from '../datetime.service';
 
 @Component({
   selector: 'app-recruitment',
@@ -25,7 +25,11 @@ export class RecruitmentComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, private applicantService: ApplicantService) { }
+  constructor(
+    public dialog: MatDialog,
+    private applicantService: ApplicantService,
+    private datetimeService: DatetimeService
+  ) { }
 
   ngOnInit(): void {
     this.fetchApplicants();
@@ -101,7 +105,6 @@ export class RecruitmentComponent implements OnInit {
   }
 
   transformDate(date: string): string {
-    let transformedDate = DateTime.fromISO(date);
-    return transformedDate.toLocal().toLocaleString(DateTime.DATE_MED);
+    return this.datetimeService.transformDate(date);
   }
 }
