@@ -31,27 +31,20 @@
     grid-row: 13 / span 2;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     border: 3px solid var(--primary-color);
     border-radius: $box-border-radius;
-    span {
-        font-size: 20px;
-        font-weight: bold;
-        padding: 10px;
-    }
-    select {
-        padding: 10px;
-    }
-    select:hover {
-        background-color: var(--primary-color);
-        color: var(--secondary-color);
-        cursor: pointer;
+
+    mat-form-field {
+        margin-left: 15px;
+        min-width: 16rem;
     }
 
     button {
-        margin-left: auto;
+        margin-left: 10px;
         margin-right: 15px;
         border-radius: $box-border-radius;
-        padding: 10px;
+        padding: 10px 30px;
         background-color: var(--secondary-color);
     }
 
@@ -66,8 +59,8 @@
     margin-left: auto;
     background-color: var(--secondary-color);
     border-radius: $box-border-radius;
-    max-width: 20rem;
-    min-width: 20rem;
+    max-width: 16rem;
+    min-width: 16rem;
 }
 
 .comment-box {
@@ -115,4 +108,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    height: 0px;
 }

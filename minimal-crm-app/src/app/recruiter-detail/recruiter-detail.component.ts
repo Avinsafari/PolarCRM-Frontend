@@ -54,9 +54,7 @@ export class RecruiterDetailComponent implements OnInit {
     try {
       this.applicantService.getApplicantDetails(this.id).subscribe(applicantData => {
         this.applicantDetails = applicantData;
-        console.log(this.applicantDetails)
-        this.currentApplicantStage = this.applicantStages
-        .find(stage => stage.value === this.applicantDetails.stage)?.displayValue;
+        this.currentApplicantStage = applicantData.stage;
         this.applicantDetails.motivation.map((motivation, index) => {
           this.motivationForJoiningOptions[index].value = motivation;
         });
@@ -80,16 +78,17 @@ export class RecruiterDetailComponent implements OnInit {
       };
       this.applicantDetails?.comments.push(newComment);
       this.applicantService.updateApplicant(this.applicantDetails)
-      .subscribe(updatedComments => {
-        this.applicantDetails.comments = updatedComments.comments;
+      .subscribe(updatedApplicant => {
+        this.applicantDetails.comments = updatedApplicant.comments;
       });
       this.newComment = "";
     }
   }
   saveApplicantChanges() {
-    const oldStage = this.applicantDetails.stage;
+    const oldStage = this.transformStageView(this.applicantDetails.stage);
     this.applicantDetails.stage = this.currentApplicantStage as string;
-    const entry = `Updated: ${oldStage} to ${this.currentApplicantStage}`
+    const newStage = this.transformStageView(this.applicantDetails.stage);
+    const entry = `Updated: ${oldStage} to ${newStage}`;
     const newComment: Comment = {
       changedAt: new Date(),
       entry: entry,
@@ -108,5 +107,33 @@ export class RecruiterDetailComponent implements OnInit {
 
   transformDateAndTime(date: any): string {
     return this.datetimeService.transformDateAndTime(date);
+  }
+
+  transformStageView(stage: string): string {
+    
+    switch (stage) {
+      case 'open':
+        return 'Open';
+      case 'contacted':
+        return 'Contacted';
+      case 'toBeInterviewed':
+        return 'To Be Interviewed';
+      case 'interviewed':
+        return 'Interviewed';
+      case 'onHold':
+        return 'On Hold';
+      case 'toBeRejected':
+        return 'To Be Rejected';
+      case 'rejected':
+        return 'Rejected';
+      case 'candidateNotInterested':
+        return 'Candidate Not Interested';
+      case 'selected':
+        return 'Selected';
+      case 'duplicate':
+        return 'Duplicate';
+      default:
+        return 'Unknown';
+    }
   }
 }
