@@ -66,8 +66,8 @@
         max-height: 65vh;
     }
 
-    p {
-        margin: 0px 5px;
+    .entry {
+        font-size: 12px;
     }
 
     .chatbox {
@@ -77,6 +77,14 @@
         margin: 15px;
         font: 17px arial, sans-serif;
     }
+}
+
+.manual {
+    font-weight: bold;
+}
+
+.automatic {
+    font-style: italic;
 }
 
 .loading {

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MemberDataDetail } from '../interfaces';
+import { MemberDataDetail, Comment } from '../interfaces';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
 
@@ -16,7 +16,6 @@ export class MembersDetailComponent implements OnInit {
   comments: string[];
   newComment: string;
   memberDetails: MemberDataDetail;
-  
 
   constructor(
       private fb: FormBuilder,
@@ -58,9 +57,22 @@ export class MembersDetailComponent implements OnInit {
 
   addComment() {
     if (this.newComment != "") {
-        this.comments.push(this.newComment);
-        this.newComment = "";
+      const newComment: Comment = {
+        changedAt: new Date(),
+        entry: this.newComment,
+        userTyped: true
+      };
+      this.memberDetails?.comments.push(newComment);
+      this.memberService.updateMember(this.memberDetails)
+      .subscribe(updatedMember => {
+        this.memberDetails.comments = updatedMember.comments;
+      });
+      this.newComment = "";
     }
+  }
+
+  transformDateAndTime(date: any): string {
+    return this.datetimeService.transformDateAndTime(date);
   }
 
   transformDate(date: any): string{

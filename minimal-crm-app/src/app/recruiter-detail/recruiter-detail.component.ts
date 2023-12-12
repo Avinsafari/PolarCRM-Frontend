@@ -69,6 +69,7 @@ export class RecruiterDetailComponent implements OnInit {
     this.dialogRef.close();
     this.ready = false;
   }
+  
   addComment() {
     if (this.newComment != "") {
       const newComment: Comment = {
@@ -84,6 +85,7 @@ export class RecruiterDetailComponent implements OnInit {
       this.newComment = "";
     }
   }
+
   saveApplicantChanges() {
     const oldStage = this.transformStageView(this.applicantDetails.stage);
     this.applicantDetails.stage = this.currentApplicantStage as string;
