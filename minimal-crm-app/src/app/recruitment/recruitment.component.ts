@@ -17,7 +17,7 @@ import { DatetimeService } from '../datetime.service';
 
 export class RecruitmentComponent implements OnInit {
   displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'stage', 'signup-date'];
-  dataSource: MatTableDataSource<ApplicantData>;
+  dataSource: MatTableDataSource<ApplicantData> = new MatTableDataSource<ApplicantData>();
   applicants: ApplicantData[] = [];
   openCounter: number = 0;
   includeArchived: boolean = false;
@@ -42,7 +42,7 @@ export class RecruitmentComponent implements OnInit {
     try {
       this.applicantService.getApplicants(this.includeArchived).subscribe(applicants => {
         this.applicants = applicants;
-        this.dataSource = new MatTableDataSource(this.applicants);
+        this.dataSource.data = this.applicants;
         this.dataSource.paginator = this.paginator;
       });
     } catch (err) {
