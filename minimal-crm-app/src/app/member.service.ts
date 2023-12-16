@@ -15,6 +15,7 @@ export class MemberService {
   detailOneMemberUrl = this.domain + "detail/";
   createNewMemberUrl = this.domain + "new";
   updateMemberUrl = this.domain + "update/";
+  addNewRoleUrl = this.domain + "add-new-role/";
 
   constructor(private http: HttpClient){}
 
@@ -43,5 +44,9 @@ export class MemberService {
 
   updateMember(member: MemberDataDetail): Observable<MemberDataDetail> {
     return this.http.put<MemberDataDetail>(this.updateMemberUrl, member, { headers: {'Access-Control-Allow-Origin': '*'}});
-}
+  }
+
+  addNewRole(member: MemberDataDetail): Observable<MemberDataDetail> {
+    return this.http.put<MemberDataDetail>(this.addNewRoleUrl, member, { headers: {'Access-Control-Allow-Origin': '*'}});
+  }
 }
