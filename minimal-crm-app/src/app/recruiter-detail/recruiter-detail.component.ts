@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApplicantDataDetail, ApplicantStages, Comment, MotivationForJoining } from '../interfaces';
+import { ApplicantDataDetail, ApplicantStage, ApplicantStageType, Comment, MotivationForJoining } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-recruiter-detail',
@@ -15,7 +16,7 @@ export class RecruiterDetailComponent implements OnInit {
   comments: string[];
   newComment: string;
   motivationForJoining: boolean[];
-  applicantStages: ApplicantStages[] = [
+  applicantStages: ApplicantStage[] = [
     {value: 'open', displayValue: 'Open'},
     {value: 'contacted', displayValue: 'Contacted'},
     {value: 'toBeInterviewed', displayValue: 'To Be Interviewed'},
@@ -33,7 +34,7 @@ export class RecruiterDetailComponent implements OnInit {
     {value: 'false', displayValue: 'Beitrag zur interkulturellen Verständigung'},
   ];
 
-  currentApplicantStage: string | undefined;
+  currentApplicantStage: ApplicantStageType;
   applicantDetails: ApplicantDataDetail;
 
   constructor(
@@ -41,7 +42,8 @@ export class RecruiterDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public id: number,
     private applicantService: ApplicantService,
     private memberService: MemberService,
-    private datetimeService: DatetimeService
+    private datetimeService: DatetimeService,
+    private displayService: DisplayService
   ) { }
 
   ngOnInit() {
@@ -88,7 +90,7 @@ export class RecruiterDetailComponent implements OnInit {
 
   saveApplicantChanges() {
     const oldStage = this.transformStageView(this.applicantDetails.stage);
-    this.applicantDetails.stage = this.currentApplicantStage as string;
+    this.applicantDetails.stage = this.currentApplicantStage;
     const newStage = this.transformStageView(this.applicantDetails.stage);
     const entry = `Updated: ${oldStage} to ${newStage}`;
     const newComment: Comment = {
@@ -112,30 +114,6 @@ export class RecruiterDetailComponent implements OnInit {
   }
 
   transformStageView(stage: string): string {
-    
-    switch (stage) {
-      case 'open':
-        return 'Open';
-      case 'contacted':
-        return 'Contacted';
-      case 'toBeInterviewed':
-        return 'To Be Interviewed';
-      case 'interviewed':
-        return 'Interviewed';
-      case 'onHold':
-        return 'On Hold';
-      case 'toBeRejected':
-        return 'To Be Rejected';
-      case 'rejected':
-        return 'Rejected';
-      case 'candidateNotInterested':
-        return 'Candidate Not Interested';
-      case 'selected':
-        return 'Selected';
-      case 'duplicate':
-        return 'Duplicate';
-      default:
-        return 'Unknown';
-    }
+    return this.displayService.getApplicantStageDisplayValue(stage);
   }
 }

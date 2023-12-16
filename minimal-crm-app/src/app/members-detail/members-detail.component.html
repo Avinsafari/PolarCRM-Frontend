@@ -3,18 +3,18 @@
 <ng-template #content>
     <div class="content">
         <div class="member-information">
-            <span class="characteristics"><span>Member ID: </span><span class="infos">{{memberDetails._id}}</span></span>
-            <span class="characteristics"><span>First Name: </span><span class="infos">{{memberDetails.firstName}}</span></span>
-            <span class="characteristics"><span>Family Name: </span><span class="infos">{{memberDetails.familyName}}</span></span>
-            <span class="characteristics"><span>Local Committee: </span><span class="infos">{{memberDetails.lc}}</span></span>
-            <span class="characteristics"><span>Email: </span><span class="infos">{{memberDetails.email}}</span></span>
-            <span class="characteristics"><span>Telephone Number: </span><span class="infos">{{memberDetails.telephone}}</span></span>
-            <span class="characteristics"><span>Expa ID: </span><span class="infos">{{memberDetails.expaId}}</span></span>
-            <span class="characteristics"><span>AIESEC Email: </span><span class="infos">{{memberDetails.aiesecEmail}}</span></span>
-            <span class="characteristics"><span>Member Since: </span><span class="infos">{{transformDate(memberDetails.createdAt)}}</span></span>
-            <span class="characteristics"><span>Function: </span><span class="infos">TM</span></span>
-            <span class="characteristics"><span>Role: </span><span class="infos">Newbie</span></span>
-            <span class="characteristics"><span>Term: </span><span class="infos">11.09.2023 &ndash; 11.03.2024</span></span>
+            <span class="characteristics"><span>Member ID: </span><span class="infos">{{ memberDetails._id }}</span></span>
+            <span class="characteristics"><span>First Name: </span><span class="infos">{{ memberDetails.firstName }}</span></span>
+            <span class="characteristics"><span>Family Name: </span><span class="infos">{{ memberDetails.familyName }}</span></span>
+            <span class="characteristics"><span>Local Committee: </span><span class="infos">{{ memberDetails.lc }}</span></span>
+            <span class="characteristics"><span>Email: </span><span class="infos">{{ memberDetails.email }}</span></span>
+            <span class="characteristics"><span>Telephone Number: </span><span class="infos">{{ memberDetails.telephone }}</span></span>
+            <span class="characteristics"><span>Expa ID: </span><span class="infos">{{ memberDetails.expaId }}</span></span>
+            <span class="characteristics"><span>AIESEC Email: </span><span class="infos">{{ memberDetails.aiesecEmail }}</span></span>
+            <span class="characteristics"><span>Member Since: </span><span class="infos">{{ transformDate(memberDetails.createdAt) }}</span></span>
+            <span class="characteristics"><span>Function: </span><span class="infos">{{ transformFunctionView(memberDetails.currentRole.function) }}</span></span>
+            <span class="characteristics"><span>Role: </span><span class="infos">{{ transformRoleView(memberDetails.currentRole.role) }}</span></span>
+            <span class="characteristics"><span>Term: </span><span class="infos">{{ transformDate(memberDetails.currentRole.firstDateInRole) }} &ndash; {{ transformDate(memberDetails.currentRole.endOfTerm) }}</span></span>
         </div>
         <div class="comment-box">
             <h3>Comment-Box</h3>
@@ -27,7 +27,7 @@
             </div>
             <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
         </div>
-        <span class="stage"><span>Stage: </span><span class="infos">{{transformStageView(memberDetails.stage)}}</span></span>
+        <span class="stage"><span>Stage: </span><span class="infos">{{transformStageView(memberDetails.currentRole.stage)}}</span></span>
     </div>
 </ng-template>
 

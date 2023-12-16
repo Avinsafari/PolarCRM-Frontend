@@ -8,6 +8,7 @@ import { ApplicantData } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
 import { DatetimeService } from '../datetime.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-recruitment',
@@ -28,7 +29,8 @@ export class RecruitmentComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private applicantService: ApplicantService,
-    private datetimeService: DatetimeService
+    private datetimeService: DatetimeService,
+    private displayService: DisplayService
   ) { }
 
   ngOnInit(): void {
@@ -77,31 +79,7 @@ export class RecruitmentComponent implements OnInit {
   }
 
   transformStageView(stage: string): string {
-    
-    switch (stage) {
-      case 'open':
-        return 'Open';
-      case 'contacted':
-        return 'Contacted';
-      case 'toBeInterviewed':
-        return 'To Be Interviewed';
-      case 'interviewed':
-        return 'Interviewed';
-      case 'onHold':
-        return 'On Hold';
-      case 'toBeRejected':
-        return 'To Be Rejected';
-      case 'rejected':
-        return 'Rejected';
-      case 'candidateNotInterested':
-        return 'Candidate Not Interested';
-      case 'selected':
-        return 'Selected';
-      case 'duplicate':
-        return 'Duplicate';
-      default:
-        return 'Unknown';
-    }
+    return this.displayService.getApplicantStageDisplayValue(stage);
   }
 
   transformDate(date: string): string {

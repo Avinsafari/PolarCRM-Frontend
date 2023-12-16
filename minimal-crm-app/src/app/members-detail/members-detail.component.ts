@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MemberDataDetail, Comment } from '../interfaces';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-members-detail',
@@ -22,7 +23,8 @@ export class MembersDetailComponent implements OnInit {
       private dialogRef: MatDialogRef<MembersDetailComponent>,
       @Inject(MAT_DIALOG_DATA) public id: number,
       private memberService: MemberService,
-      private datetimeService: DatetimeService
+      private datetimeService: DatetimeService,
+      private displayService: DisplayService
     ) { }
 
   ngOnInit() {
@@ -80,28 +82,14 @@ export class MembersDetailComponent implements OnInit {
   }
 
   transformStageView(stage: string): string {
-    
-    switch (stage) {
-      case 'accepted':
-        return 'Accepted';
-      case 'approved':
-        return 'Approved';
-      case 'realized':
-        return 'Realized';
-      case 'finished':
-        return 'Finished';
-      case 'completed':
-        return 'Completed';
-      case 'dropped':
-        return 'Dropped';
-      case 'terminated':
-        return 'Terminated';
-      case 'advanced':
-        return 'Advanced';
-      case 'alumni':
-        return 'Alumni';
-      default:
-        return 'Unknown';
-    }
+    return this.displayService.getMemberStageDisplayValue(stage);
+  }
+
+  transformRoleView(role: string): string {
+    return this.displayService.getMemberRoleDisplayValue(role);
+  }
+
+  transformFunctionView(functionName: string): string {
+    return this.displayService.getMemberFunctionDisplayValue(functionName);
   }
 }

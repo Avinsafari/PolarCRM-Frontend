@@ -7,6 +7,7 @@ import { MemberData } from '../interfaces';
 import { MembersDetailComponent } from '../members-detail/members-detail.component';
 import { MemberService } from '../member.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-members',
@@ -24,7 +25,11 @@ export class MembersComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, private memberService: MemberService) { }
+  constructor(
+    public dialog: MatDialog,
+    private memberService: MemberService,
+    private displayService: DisplayService
+    ) { }
 
   ngOnInit(): void {
     this.fetchMembers();
@@ -72,28 +77,14 @@ export class MembersComponent implements OnInit{
   }
 
   transformStageView(stage: string): string {
-    
-    switch (stage) {
-      case 'accepted':
-        return 'Accepted';
-      case 'approved':
-        return 'Approved';
-      case 'realized':
-        return 'Realized';
-      case 'finished':
-        return 'Finished';
-      case 'completed':
-        return 'Completed';
-      case 'dropped':
-        return 'Dropped';
-      case 'terminated':
-        return 'Terminated';
-      case 'advanced':
-        return 'Advanced';
-      case 'alumni':
-        return 'Alumni';
-      default:
-        return 'Unknown';
-    }
+    return this.displayService.getMemberStageDisplayValue(stage);
   }
+
+  transformRoleView(role: string): string {
+    return this.displayService.getMemberRoleDisplayValue(role);
+  }
+
+  transformFunctionView(functionName: string): string {
+    return this.displayService.getMemberFunctionDisplayValue(functionName);
+  } 
 }
