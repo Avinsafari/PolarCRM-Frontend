@@ -34,7 +34,7 @@
         <span class="stage">
             <mat-form-field>
                 <mat-label>Change Applicant Stage</mat-label>
-                <mat-select [(value)]="currentApplicantStage">
+                <mat-select [(value)]="currentApplicantStage" [disabled]="currentApplicantStage === 'selected'">
                   <mat-option *ngFor="let stage of applicantStages" [value]="stage.value">{{stage.displayValue}}</mat-option>
                 </mat-select>
             </mat-form-field>
