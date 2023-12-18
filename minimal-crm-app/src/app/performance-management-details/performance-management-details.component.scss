@@ -7,13 +7,25 @@ $tab-margin: 18px;
     height: 100%;
 }
 
+mat-expansion-panel {
+    margin-top: 20px;
+}
+
 mat-tab-group {
     padding: 10px;
     height: calc(100% - 20px);
 }
 
+mat-form-field {
+    width: 100%;
+}
+
 :host ::ng-deep .mat-mdc-tab-body-wrapper{
     flex-grow: 1;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    height: 0px;
 }
 
 .loading {
@@ -33,7 +45,18 @@ mat-tab-group {
     width: calc(100% - 2*$tab-margin - 2*$tab-padding);
 }
 
-.member-information {
+.row {
+    display: flex;
+    align-items: center;
+    column-gap: 3rem;
+    margin: 2rem 0;
+}
+
+.roleSubheader {
+    font-size: 18px;
+}
+
+.member-doc {
     flex-direction: row;
     justify-content: space-around;
 }
@@ -67,43 +90,35 @@ mat-tab-group {
         color: var(--primary-color);
         cursor: pointer;
     }
+
+    .docs-input {
+        margin-bottom: 22px;
+    }
 }
 
 .panel-line {
     display: block
 }
 
-.status {
-    grid-column: 1 / span 1;
-    grid-row: 13 / span 2;
+.stage {
+    align-self: center;
+    margin-top: calc(2*$tab-margin);
+
     display: flex;
     align-items: center;
+    justify-content: space-around;
     border: 3px solid var(--primary-color);
     border-radius: $box-border-radius;
-    span {
-        font-size: 20px;
-        font-weight: bold;
-        padding: 10px;
-    }
-    select {
-        padding: 10px;
-        margin-left: auto;
-        background-color: var(--secondary-color);
-        border-radius: $box-border-radius;
-        max-width: 20rem;
-        min-width: 20rem;
-    }
-    select:hover {
-        background-color: var(--primary-color);
-        color: var(--secondary-color);
-        cursor: pointer;
+    
+    mat-form-field {
+        min-width: 16rem;
+        padding: 20px;
     }
 
     button {
-        margin-left: auto;
         margin-right: 15px;
         border-radius: $box-border-radius;
-        padding: 10px;
+        padding: 10px 30px;
         background-color: var(--secondary-color);
     }
 
@@ -114,3 +129,18 @@ mat-tab-group {
     }
 }
 
+.add-button {
+    align-self: center;
+    border-radius: $box-border-radius;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin-top: 22px;
+}
+
+.add-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}

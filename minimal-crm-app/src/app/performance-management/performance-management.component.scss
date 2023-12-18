@@ -4,9 +4,8 @@ mat-card {
     flex-direction: row;
 }
 
-mat-list-option:hover {
+.activeMember {
     background-color: var(--tertiary-color);
-    cursor: pointer;
 }
 
 .member-nav {
@@ -17,16 +16,6 @@ mat-list-option:hover {
 .member-performance {
     flex-grow: 1; 
     overflow: auto;
-}
-
-.lc-info {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    height: calc(100% - 20px - 20px);
-    width: calc(100% - 20px - 20px);
 }
 
 .loading {

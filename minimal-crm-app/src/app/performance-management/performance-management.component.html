@@ -6,30 +6,21 @@
 
 <ng-template #content>
     <div class="member-nav">
-        <mat-selection-list
-            multiple="false"
-            hideSingleSelectionIndicator="true"
-            color="primary"
-        >
+        <mat-nav-list>
             <ng-container *ngFor="let member of members">
-                <mat-list-option (click)="onMemberSelected(member._id)">
+                <mat-list-item
+                    [routerLink]="[{outlets: {'member': [member._id]}}]"
+                    [routerLinkActive]="['activeMember']"
+                >
                     {{member.firstName}}
-                </mat-list-option>
+                </mat-list-item>
                 <mat-divider></mat-divider>
             </ng-container>
-        </mat-selection-list>
+        </mat-nav-list>
     </div>
+    <mat-divider [vertical]="true"></mat-divider>
     <div class="member-performance">
-        <app-performance-management-details *ngIf="selectedMemberId" [memberId]="selectedMemberId"></app-performance-management-details>
-        <div class="lc-info" *ngIf="!selectedMemberId">
-            <h2>Select a member to see his/her performance</h2>
-            <span>Current Number of Members in LC:</span>
-            <span>Talent Management:</span>
-            <span>Incoming Global Talent:</span>
-            <span>Outgoing Global Talent:</span>
-            <span>Finance:</span>
-            <span>Marketing:</span>
-        </div>
+        <router-outlet name="member"></router-outlet>
     </div>
 </ng-template>
 

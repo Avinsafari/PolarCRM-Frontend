@@ -1,6 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { MemberDataDetail, MemberStages } from '../interfaces';
+import { Component } from '@angular/core';
+import { Comment, Function, FunctionType, MemberDataDetail, MemberStage, MemberStageType, Role, RoleType } from '../interfaces';
 import { MemberService } from '../member.service';
+import { MatChipListboxChange } from '@angular/material/chips';
+import { DateTime } from 'luxon';
+import { DisplayService } from '../display.service';
+import { DatetimeService } from '../datetime.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ResponsiveDialogComponent } from '../responsive-dialog/responsive-dialog.component';
 
 @Component({
   selector: 'app-performance-management-details',
@@ -12,8 +19,14 @@ export class PerformanceManagementDetailsComponent {
   public memberDetails: MemberDataDetail;
   public ready: boolean = false;
   public panelOpenState: boolean = false;
-  public currentMemberStatus: string;
-  public memberStages: MemberStages[] = [
+  public newRole: RoleType;
+  public newFunction: FunctionType;
+  public newJobDescription: string;
+  public currentMemberId: number;
+  public currentMemberStage: MemberStageType;
+  public currentMemberRole: RoleType;
+  public currentMemberFunction: FunctionType;
+  public memberStages: MemberStage[] = [
     {value: 'accepted', displayValue: 'Accepted'},
     {value: 'approved', displayValue: 'Approved'},
     {value: 'realized', displayValue: 'Realized'},
@@ -24,18 +37,42 @@ export class PerformanceManagementDetailsComponent {
     {value: 'advanced', displayValue: 'Advanced'},
     {value: 'alumni', displayValue: 'Alumni'}
   ];
-
-  @Input() public memberId: number;
+  public roles: Role[] = [
+    {value: 'newbie', displayValue: 'Newbie'},
+    {value: 'member', displayValue: 'Member'},
+    {value: 'teamLeader', displayValue: 'Team Leader'},
+    {value: 'vicePresident', displayValue: 'Vice President'}
+  ];
+  public functions: Function[] = [
+    {value: 'finance', displayValue: 'Finance'},
+    {value: 'marketing', displayValue: 'Marketing'},
+    {value: 'outgoingGlobalExchange', displayValue: 'Outgoing Global Exchange'},
+    {value: 'incomingGlobalExchange', displayValue: 'Incoming Global Exchange'},
+    {value: 'talentManagement', displayValue: 'Talent Management'}
+  ];
 
   constructor(
-    private memberService: MemberService
+    private memberService: MemberService,
+    private displayService: DisplayService,
+    private dateService: DatetimeService,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.currentMemberId = params['id'];
+      this.fetchMemberDetails();
+    });
+  }
+
+  public fetchMemberDetails() {
     try {
-      this.memberService.getMemberDetails(this.memberId).subscribe(memberData => {
+      this.memberService.getMemberDetails(this.currentMemberId).subscribe(memberData => {
         this.memberDetails = memberData;
-        this.currentMemberStatus = this.memberDetails.status;
+        this.currentMemberStage = this.memberDetails.currentRole.stage;
+        this.currentMemberRole = this.memberDetails.currentRole.role;
+        this.currentMemberFunction = this.memberDetails.currentRole.function;
         this.ready = true;
       });
     } catch (error) {
@@ -43,7 +80,135 @@ export class PerformanceManagementDetailsComponent {
     }
   }
 
-  public saveMemberChanges() {
+  public updateStage() {
+    const oldStage = this.transformStageView(this.memberDetails.currentRole.stage);
+    this.memberDetails.currentRole.stage = this.currentMemberStage;
+    const newStage = this.transformStageView(this.memberDetails.currentRole.stage);
 
+    const entry = `Updated Stage: ${oldStage} to ${newStage}`;
+    const newComment: Comment = {
+      changedAt: new Date(),
+      entry: entry,
+      userTyped: false
+    };
+
+    this.memberDetails.comments.push(newComment);
+
+    switch (this.currentMemberStage) {
+      case 'realized':
+        this.memberDetails.currentRole.dateOfRealized = new Date();
+        break;
+      case 'dropped':
+        this.memberDetails.currentRole.lastDateInRole = new Date();
+        this.memberDetails.pastRole?.push({ ...this.memberDetails.currentRole });
+        this.memberDetails.currentRole.function = 'none';
+        this.memberDetails.currentRole.role = 'none';
+        break;
+      case 'terminated':
+        this.memberDetails.currentRole.lastDateInRole = new Date();
+        this.memberDetails.pastRole?.push({ ...this.memberDetails.currentRole });
+        this.memberDetails.currentRole.function = 'none';
+        this.memberDetails.currentRole.role = 'none';
+        break;
+      case 'advanced':
+        this.memberDetails.currentRole.lastDateInRole = new Date();
+        this.memberDetails.pastRole?.push({ ...this.memberDetails.currentRole });
+        this.memberDetails.currentRole.function = 'none';
+        this.memberDetails.currentRole.role = 'none';
+        this.memberDetails.currentRole.stage = 'accepted';
+        break;
+      case 'alumni':
+        this.memberDetails.currentRole.lastDateInRole = new Date();
+        this.memberDetails.pastRole?.push({ ...this.memberDetails.currentRole });
+        this.memberDetails.currentRole.function = 'none';
+        this.memberDetails.currentRole.role = 'none';
+        break;
+      default:
+        break;
+    }
+
+    try{
+      this.memberService.updateMember(this.memberDetails).subscribe(() => {
+        console.log('Member updated')
+        this.fetchMemberDetails();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public updateRole(event: MatChipListboxChange) {
+    this.newRole = event.value;
+  }
+
+  public updateFunction(event: MatChipListboxChange) {
+    this.newFunction = event.value;
+  }
+
+  public async addNewRole() {
+    if(this.newRole === undefined || this.newFunction === undefined) { return }
+    this.memberDetails.currentRole.role = this.newRole;
+    this.memberDetails.currentRole.function = this.newFunction;
+    this.memberDetails.currentRole.jobDescription = this.newJobDescription;
+    const entry = `Added new role: ${this.transformRoleView(this.newRole)} of ${this.transformFunctionView(this.newFunction)}`;
+    const newComment: Comment = {
+      changedAt: new Date(),
+      entry: entry,
+      userTyped: false
+    };
+
+    this.memberDetails.comments.push(newComment);
+
+    const THREE_MONTHS = DateTime.local().plus({months: 3}).toJSDate();
+    const SIX_MONTHS = DateTime.local().plus({months: 6}).toJSDate();
+    const TWELVE_MONTHS = DateTime.local().plus({months: 12}).toJSDate();
+
+    switch (this.memberDetails.currentRole.role) {
+      case 'newbie':
+        this.memberDetails.currentRole.endOfTerm = THREE_MONTHS;
+        break;
+      case 'member':
+        this.memberDetails.currentRole.endOfTerm = SIX_MONTHS;
+        break;
+      case 'teamLeader':
+        this.memberDetails.currentRole.endOfTerm = SIX_MONTHS;
+        break;
+      case 'vicePresident':
+        this.memberDetails.currentRole.endOfTerm = TWELVE_MONTHS;
+        break;
+      default:
+        break;
+    }
+
+    try{
+      this.memberService.addNewRole(this.memberDetails).subscribe(() => {
+        console.log('New role added')
+        this.fetchMemberDetails();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  public openAdvancedRoleDialog() {
+    const dialogConfig = new MatDialogConfig();
+    this.dialog.open(ResponsiveDialogComponent, dialogConfig);
+  }
+
+  transformStageView(stage: string): string {
+    return this.displayService.getMemberStageDisplayValue(stage);
+  }
+
+  transformRoleView(role: string): string {
+    return this.displayService.getMemberRoleDisplayValue(role);
+  }
+
+  transformFunctionView(functionName: string): string {
+    return this.displayService.getMemberFunctionDisplayValue(functionName);
+  }
+
+  transformDate(date: any): string {
+    return this.dateService.transformDate(date);
   }
 }

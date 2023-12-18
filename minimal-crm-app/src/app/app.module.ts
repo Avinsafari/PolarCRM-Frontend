@@ -32,6 +32,7 @@ import { RecruiterDetailComponent } from './recruiter-detail/recruiter-detail.co
 import { LoginComponent } from './login/login.component';
 import { MembersDetailComponent } from './members-detail/members-detail.component';
 import { PerformanceManagementDetailsComponent } from './performance-management-details/performance-management-details.component';
+import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PerformanceManagementDetailsComponent } from './performance-management-
     RecruiterDetailComponent,
     LoginComponent,
     MembersDetailComponent,
-    PerformanceManagementDetailsComponent
+    PerformanceManagementDetailsComponent,
+    ResponsiveDialogComponent
   ],
   imports: [
     BrowserModule,
