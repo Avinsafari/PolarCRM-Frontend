@@ -11,7 +11,7 @@ interface SideNavToggle {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'minimal-crm-app';
+  title = 'polar-crm';
   authorized = true;
 
   isSideNavExtended = false;

@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'minimal-crm-app'`, () => {
+  it(`should have as title 'polar-crm'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('minimal-crm-app');
+    expect(app.title).toEqual('polar-crm');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('minimal-crm-app app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('polar-crm app is running!');
   });
 });
