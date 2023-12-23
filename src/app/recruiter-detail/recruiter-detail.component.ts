@@ -107,7 +107,7 @@ export class RecruiterDetailComponent implements OnInit {
     this.applicantDetails.comments.push(newComment);
     try {
       this.applicantService.updateApplicant(this.applicantDetails).subscribe(() => {
-          this.snackbar.open("Applicant has been updated", "", { duration: 2000 });
+          // this.snackbar.open("Applicant has been updated", "", { duration: 2000 });
         }
       );
     } catch(err) {
@@ -121,8 +121,8 @@ export class RecruiterDetailComponent implements OnInit {
     
     if(this.currentApplicantStage == "selected"){
       try {
-        this.memberService.createNewMember(this.applicantDetails).subscribe(() => {
-            this.snackbar.open("Applicant has been added as a new member", "", { duration: 2000 });
+        this.memberService.createNewMember(this.applicantDetails).subscribe((message) => {
+            this.snackbar.open(JSON.parse(JSON.stringify(message))["message"], "", { duration: 2000 });
           }
         );
       } catch(err) {

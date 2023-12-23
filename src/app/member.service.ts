@@ -38,8 +38,8 @@ export class MemberService {
     );
   }
 
-  createNewMember(member: ApplicantDataDetail): Observable<MemberDataDetail>{
-    return this.http.post<MemberDataDetail>(this.createNewMemberUrl, member);
+  createNewMember(member: ApplicantDataDetail): Observable<string>{
+    return this.http.post<string>(this.createNewMemberUrl, member);
   }
 
   updateMember(member: MemberDataDetail): Observable<MemberDataDetail> {
