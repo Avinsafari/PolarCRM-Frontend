@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MemberService } from '../member.service';
 import { MemberData } from '../interfaces';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-performance-management',
@@ -15,17 +16,22 @@ export class PerformanceManagementComponent {
   public ready: boolean = false;
 
   constructor(
-    private memberService: MemberService
+    private memberService: MemberService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    try{
+    try {
       this.memberService.getMembers(this.includeArchived).subscribe(members => {
         this.members = members;
         this.ready = true;
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Members could not be fetched", "", { duration: 5000 });
+      }
     }
   }
 }

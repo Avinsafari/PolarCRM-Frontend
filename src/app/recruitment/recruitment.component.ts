@@ -9,6 +9,7 @@ import { ApplicantService } from '../applicant.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
 import { DatetimeService } from '../datetime.service';
 import { DisplayService } from '../display.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-recruitment',
@@ -30,7 +31,8 @@ export class RecruitmentComponent implements OnInit {
     public dialog: MatDialog,
     private applicantService: ApplicantService,
     private datetimeService: DatetimeService,
-    private displayService: DisplayService
+    private displayService: DisplayService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +50,11 @@ export class RecruitmentComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       });
     } catch (err) {
-      console.log(err);
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Applicants could not be fetched", "", { duration: 5000 });
+      }
     }
   }
 

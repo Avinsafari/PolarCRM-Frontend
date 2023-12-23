@@ -8,6 +8,7 @@ import { MembersDetailComponent } from '../members-detail/members-detail.compone
 import { MemberService } from '../member.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
 import { DisplayService } from '../display.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-members',
@@ -28,7 +29,8 @@ export class MembersComponent implements OnInit{
   constructor(
     public dialog: MatDialog,
     private memberService: MemberService,
-    private displayService: DisplayService
+    private displayService: DisplayService,
+    private snackbar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
@@ -46,7 +48,11 @@ export class MembersComponent implements OnInit{
         this.dataSource.paginator = this.paginator;
       });
     } catch (err) {
-      console.log(err);
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Members could not be fetched", "", { duration: 5000 });
+      }
     }
   }
 

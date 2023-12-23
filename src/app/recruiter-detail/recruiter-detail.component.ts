@@ -5,6 +5,7 @@ import { ApplicantService } from '../applicant.service';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
 import { DisplayService } from '../display.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-recruiter-detail',
@@ -43,7 +44,8 @@ export class RecruiterDetailComponent implements OnInit {
     private applicantService: ApplicantService,
     private memberService: MemberService,
     private datetimeService: DatetimeService,
-    private displayService: DisplayService
+    private displayService: DisplayService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -63,7 +65,11 @@ export class RecruiterDetailComponent implements OnInit {
         this.ready = true;
       });
     } catch (err) {
-      console.log(err);
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Applicant Details could not be fetched", "", { duration: 5000 });
+      }
     }
   }
 
@@ -99,12 +105,33 @@ export class RecruiterDetailComponent implements OnInit {
       userTyped: false
     };
     this.applicantDetails.comments.push(newComment);
-    this.applicantService.updateApplicant(this.applicantDetails).subscribe();
+    try {
+      this.applicantService.updateApplicant(this.applicantDetails).subscribe(() => {
+          this.snackbar.open("Applicant has been updated", "", { duration: 2000 });
+        }
+      );
+    } catch(err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Applicant could not be updated", "", { duration: 5000 });
+      }
+      return;
+    }
     
     if(this.currentApplicantStage == "selected"){
-      try{
-        this.memberService.createNewMember(this.applicantDetails).subscribe();
-      }catch(err) {}
+      try {
+        this.memberService.createNewMember(this.applicantDetails).subscribe(() => {
+            this.snackbar.open("Applicant has been added as a new member", "", { duration: 2000 });
+          }
+        );
+      } catch(err) {
+        if(err instanceof Error) {
+          this.snackbar.open(err.message, "", { duration: 5000 });
+        } else {
+          this.snackbar.open("Applicant could not be added as a new member", "", { duration: 5000 });
+        }
+      }
     }
     this.close();
   }

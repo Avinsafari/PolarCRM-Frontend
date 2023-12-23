@@ -8,6 +8,7 @@ import { DatetimeService } from '../datetime.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ResponsiveDialogComponent } from '../responsive-dialog/responsive-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-performance-management-details',
@@ -56,7 +57,8 @@ export class PerformanceManagementDetailsComponent {
     private displayService: DisplayService,
     private dateService: DatetimeService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -75,8 +77,12 @@ export class PerformanceManagementDetailsComponent {
         this.currentMemberFunction = this.memberDetails.currentRole.function;
         this.ready = true;
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Member Details could not be fetched", "", { duration: 5000 });
+      }
     }
   }
 
@@ -127,13 +133,17 @@ export class PerformanceManagementDetailsComponent {
         break;
     }
 
-    try{
+    try {
       this.memberService.updateMember(this.memberDetails).subscribe(() => {
-        console.log('Member updated')
+        this.snackbar.open('Member has been updated successfully!', "", { duration: 2000 });
         this.fetchMemberDetails();
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("Member could not be updated!", "", { duration: 5000 });
+      }
     }
   }
 
@@ -180,15 +190,18 @@ export class PerformanceManagementDetailsComponent {
         break;
     }
 
-    try{
+    try {
       this.memberService.addNewRole(this.memberDetails).subscribe(() => {
-        console.log('New role added')
+        this.snackbar.open('New role has been added successfully!', "", { duration: 2000 });
         this.fetchMemberDetails();
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, "", { duration: 5000 });
+      } else {
+        this.snackbar.open("New role could not be saved!", "", { duration: 5000 });
+      }
     }
-
   }
 
   public openAdvancedRoleDialog() {

@@ -5,6 +5,7 @@ import { MemberDataDetail, Comment } from '../interfaces';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
 import { DisplayService } from '../display.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-members-detail',
@@ -24,7 +25,8 @@ export class MembersDetailComponent implements OnInit {
       @Inject(MAT_DIALOG_DATA) public id: number,
       private memberService: MemberService,
       private datetimeService: DatetimeService,
-      private displayService: DisplayService
+      private displayService: DisplayService,
+      private snackbar: MatSnackBar
     ) { }
 
   ngOnInit() {
@@ -43,8 +45,12 @@ export class MembersDetailComponent implements OnInit {
         this.memberDetails = memberData;
         this.ready = true;
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message);
+      } else {
+        this.snackbar.open("Member Details could not be fetched");
+      }
     }
   }
 
