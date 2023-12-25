@@ -107,7 +107,7 @@ export class RecruiterDetailComponent implements OnInit {
     this.applicantDetails.comments.push(newComment);
     try {
       this.applicantService.updateApplicant(this.applicantDetails).subscribe(() => {
-          // this.snackbar.open("Applicant has been updated", "", { duration: 2000 });
+          this.snackbar.open("Applicant has been updated", "", { duration: 2000 });
         }
       );
     } catch(err) {
