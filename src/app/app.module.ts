@@ -25,7 +25,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BodyComponent } from './body/body.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { PerformanceManagementComponent } from './performance-management/performance-management.component';
 import { MembersComponent } from './members/members.component';
@@ -40,7 +39,6 @@ import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    BodyComponent,
     RecruitmentComponent,
     PerformanceManagementComponent,
     MembersComponent,

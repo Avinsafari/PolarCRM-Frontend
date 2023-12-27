@@ -1,13 +1,10 @@
 .sidenav {
     background: var(--primary-color);
-    transition: all .5s ease;
-    z-index: 1;
-    position: fixed;
+    transition: width .5s ease;
     width: 5rem;
     height: 100vh;
-    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-right-radius: var(--sidenav-border-radius);
+    border-bottom-right-radius: var(--sidenav-border-radius);
 
     .logo-container {
         display: flex;
