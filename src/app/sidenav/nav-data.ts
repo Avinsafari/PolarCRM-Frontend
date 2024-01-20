@@ -18,10 +18,5 @@ export const navbarData = [
         routeLink: 'performance-management',
         icon: 'fal fa-chart-line',
         label: 'Performance'
-    },
-    {
-        routeLink: 'login',
-        icon: 'fal fa-sign-out-alt',
-        label: 'Logout'
     }
 ];

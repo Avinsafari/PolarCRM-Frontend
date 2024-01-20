@@ -63,6 +63,8 @@ export class SidenavComponent implements OnInit {
 
   logout(): void {
     this.closeSidenav();
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.router.navigate(['/login']);
   }
 }
