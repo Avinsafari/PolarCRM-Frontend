@@ -6,6 +6,8 @@ import { MembersComponent } from './members/members.component';
 import { PerformanceManagementComponent } from './performance-management/performance-management.component';
 import { LoginComponent } from './login/login.component';
 import { PerformanceManagementDetailsComponent } from './performance-management-details/performance-management-details.component';
+import { nationalGuard } from './national.guard';
+import { localGuard } from './local.guard';
 
 const routes: Routes = [
   {
@@ -15,19 +17,23 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [nationalGuard]
   },
   {
     path: 'recruitment',
-    component: RecruitmentComponent
+    component: RecruitmentComponent,
+    canActivate: [localGuard]
   },
   {
     path: 'members',
-    component: MembersComponent
+    component: MembersComponent,
+    canActivate: [localGuard]
   },
   {
     path: 'performance-management',
     component: PerformanceManagementComponent,
+    canActivate: [localGuard],
     children: [
       {
         path: ':id',
@@ -41,7 +47,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: '**', redirectTo: 'dashboard'
+    path: '**', redirectTo: 'login'
   }
 ];
 
