@@ -1,0 +1,64 @@
+<svg viewBox="-100 -100 200 200">
+    <defs>
+
+    <path id="white-arrow" d="
+        M 0 0
+        L -20 -20
+        L 0 -100
+        Z"
+        fill="white" stroke="white" stroke-width="0" />
+
+    <path id="black-arrow" d="
+        M 0 0
+        L 20 -20
+        L 0 -100
+        Z"
+        fill="black" stroke="black" stroke-width="0" />
+
+    <path id="arrow-border" d="
+        M -20 -20
+        L 0 -100
+        L 20 -20
+        "
+        fill="none" stroke="black" stroke-width="1.5" />
+    
+    </defs>
+
+    <use href="#white-arrow"/>
+    <use href="#black-arrow"/>
+    <use href="#arrow-border"/>
+
+    <use href="#white-arrow" transform="rotate(90)"/>
+    <use href="#black-arrow" transform="rotate(90)"/>
+    <use href="#arrow-border" transform="rotate(90)"/>
+
+    <use href="#white-arrow" transform="rotate(180)"/>
+    <use href="#black-arrow" transform="rotate(180)"/>
+    <use href="#arrow-border" transform="rotate(180)"/>
+
+    <use href="#white-arrow" transform="rotate(270)"/>
+    <use href="#black-arrow" transform="rotate(270)"/>
+    <use href="#arrow-border" transform="rotate(270)"/>
+
+    <g transform="translate(0,0)" stroke="#000" stroke-width="7">
+        <path d="M0 0 A 30 40 0 0 1 -30 -70 " fill="none"/>
+        <path d="M0 0 A 30 40 0 0 1  70 -70" fill="none"/>
+        <path d="M0 0 A 30 40 0 0 1  70  70" fill="none"/>
+        <path d="M0 0 A 30 40 0 0 1 -70  70" fill="none"/>
+    </g>
+
+    <!-- <circle
+        cx="0" cy="0" r="50"
+        fill="none"
+        stroke-width="5"
+        stroke="black"
+    > -->
+
+    <!-- <path
+        d="
+            M 0 0
+            A 50 50 0 0 0 -100 100
+        "
+        stroke="green">
+    </path> -->
+</svg>
