@@ -8,17 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { PerformanceManagementDetailsComponent } from './performance-management-details/performance-management-details.component';
 import { nationalGuard } from './national.guard';
 import { localGuard } from './local.guard';
+import { adminGuard } from './admin.guard';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [nationalGuard]
+    canActivate: [localGuard]
   },
   {
     path: 'recruitment',
@@ -28,12 +25,12 @@ const routes: Routes = [
   {
     path: 'members',
     component: MembersComponent,
-    canActivate: [localGuard]
+    canActivate: [nationalGuard]
   },
   {
     path: 'performance-management',
     component: PerformanceManagementComponent,
-    canActivate: [localGuard],
+    canActivate: [adminGuard],
     children: [
       {
         path: ':id',
@@ -41,6 +38,10 @@ const routes: Routes = [
         outlet: 'member'
       }
     ]
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   },
   {
     path: 'login',
@@ -51,8 +52,11 @@ const routes: Routes = [
   }
 ];
 
+const options = {
+  enableTracing: false,
+};
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, options)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

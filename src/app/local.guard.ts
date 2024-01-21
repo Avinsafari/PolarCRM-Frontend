@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { AuthService } from './auth.service';
 
-export const localGuard: CanActivateFn =
-  ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot ) => {
-    const authService = inject(AuthService);
-  return true;
+export const localGuard: CanActivateFn = (route, state): boolean => {
+  const authService = inject(AuthService);
+  return authService.reauthenticateUser("local");
 };
