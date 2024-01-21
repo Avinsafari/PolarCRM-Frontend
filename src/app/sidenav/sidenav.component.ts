@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
 import { navbarData } from './nav-data';
 import { Router } from '@angular/router';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -45,7 +46,8 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private socialAuthService: SocialAuthService) { }
 
   ngOnInit(): void {
       this.screenWidth = window.innerWidth;
@@ -65,6 +67,7 @@ export class SidenavComponent implements OnInit {
     this.closeSidenav();
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    this.socialAuthService.signOut();
     this.router.navigate(['/login']);
   }
 }
