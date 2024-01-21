@@ -9,7 +9,6 @@ import { PerformanceManagementDetailsComponent } from './performance-management-
 import { nationalGuard } from './national.guard';
 import { localGuard } from './local.guard';
 import { adminGuard } from './admin.guard';
-import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   {
@@ -38,10 +37,6 @@ const routes: Routes = [
         outlet: 'member'
       }
     ]
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent
   },
   {
     path: 'login',
