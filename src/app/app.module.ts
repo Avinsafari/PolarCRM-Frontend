@@ -20,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { LoginComponent } from './login/login.component';
 import { MembersDetailComponent } from './members-detail/members-detail.component';
 import { PerformanceManagementDetailsComponent } from './performance-management-details/performance-management-details.component';
 import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog.component';
+import { environment } from 'src/environments/environment.development';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    SocialLoginModule,
     HttpClientModule,
     AppRoutingModule,
     MatTableModule,
@@ -72,7 +75,25 @@ import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog
     MatSelectModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+                environment.googleClientId
+              )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
