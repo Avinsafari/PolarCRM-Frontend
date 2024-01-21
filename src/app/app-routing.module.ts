@@ -34,12 +34,12 @@ const routes: Routes = [
       {
         path: 'members',
         component: MembersComponent,
-        canActivate: [nationalGuard]
+        canActivate: [localGuard]
       },
       {
         path: 'performance-management',
         component: PerformanceManagementComponent,
-        canActivate: [adminGuard],
+        canActivate: [localGuard],
         children: [
           {
             path: ':id',
