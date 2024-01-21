@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit{
         localStorage.setItem('role', this.userRole);
 
         if(this.userRole === 'national' || this.userRole === 'local' || this.userRole === 'admin') {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/app']);
         }
       });
     });

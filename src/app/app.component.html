@@ -1,13 +1,1 @@
-<div class="main">
-    <ng-container *ngIf="authorized">
-        <div class="sidenav">
-            <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
-        </div>
-        <div class="body">
-            <router-outlet></router-outlet>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="!authorized">
-        <app-login></app-login>
-    </ng-container>
-</div>
+<router-outlet></router-outlet>

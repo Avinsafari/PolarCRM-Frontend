@@ -35,6 +35,7 @@ import { MembersDetailComponent } from './members-detail/members-detail.componen
 import { PerformanceManagementDetailsComponent } from './performance-management-details/performance-management-details.component';
 import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog.component';
 import { environment } from 'src/environments/environment.development';
+import { InternalLayoutComponent } from './internal-layout/internal-layout.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { environment } from 'src/environments/environment.development';
     LoginComponent,
     MembersDetailComponent,
     PerformanceManagementDetailsComponent,
-    ResponsiveDialogComponent
+    ResponsiveDialogComponent,
+    InternalLayoutComponent
   ],
   imports: [
     BrowserModule,

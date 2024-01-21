@@ -9,32 +9,47 @@ import { PerformanceManagementDetailsComponent } from './performance-management-
 import { nationalGuard } from './national.guard';
 import { localGuard } from './local.guard';
 import { adminGuard } from './admin.guard';
+import { InternalLayoutComponent } from './internal-layout/internal-layout.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [localGuard]
-  },
-  {
-    path: 'recruitment',
-    component: RecruitmentComponent,
-    canActivate: [localGuard]
-  },
-  {
-    path: 'members',
-    component: MembersComponent,
-    canActivate: [nationalGuard]
-  },
-  {
-    path: 'performance-management',
-    component: PerformanceManagementComponent,
-    canActivate: [adminGuard],
+    path: 'app',
+    component: InternalLayoutComponent,
     children: [
       {
-        path: ':id',
-        component: PerformanceManagementDetailsComponent,
-        outlet: 'member'
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [localGuard]
+      },
+      {
+        path: 'recruitment',
+        component: RecruitmentComponent,
+        canActivate: [localGuard]
+      },
+      {
+        path: 'members',
+        component: MembersComponent,
+        canActivate: [nationalGuard]
+      },
+      {
+        path: 'performance-management',
+        component: PerformanceManagementComponent,
+        canActivate: [adminGuard],
+        children: [
+          {
+            path: ':id',
+            component: PerformanceManagementDetailsComponent,
+            outlet: 'member'
+          }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'dashboard'
       }
     ]
   },
