@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   public userIdToken: string;
   public userRole: string;
+  public userLc: string;
 
   constructor(
     private socialAuthService: SocialAuthService,
@@ -27,9 +28,10 @@ export class LoginComponent implements OnInit{
     this.socialAuthService.authState.subscribe((user) => {
       this.userIdToken = user.idToken;
       localStorage.setItem('token', this.userIdToken);
-      this.authService.authenticateUser(this.userIdToken).subscribe((role) => {
-        this.userRole = role.userRole;
+      this.authService.authenticateUser(this.userIdToken).subscribe((res) => {
+        this.userRole = res.role.userRole;
         localStorage.setItem('role', this.userRole);
+        localStorage.setItem('lc', res.lc);
 
         if(this.userRole === 'national' || this.userRole === 'local' || this.userRole === 'admin') {
           this.router.navigate(['/app']);
