@@ -135,7 +135,7 @@ export class PerformanceManagementDetailsComponent {
 
     try {
       this.memberService.updateMember(this.memberDetails).subscribe(() => {
-        this.snackbar.open('Member has been updated successfully!', "", { duration: 2000 });
+        this.snackbar.open('Member has been updated successfully', "", { duration: 2000 });
         this.fetchMemberDetails();
       });
     } catch (err) {
@@ -192,7 +192,7 @@ export class PerformanceManagementDetailsComponent {
 
     try {
       this.memberService.addNewRole(this.memberDetails).subscribe(() => {
-        this.snackbar.open('New role has been added successfully!', "", { duration: 2000 });
+        this.snackbar.open('New role has been added successfully', "", { duration: 2000 });
         this.fetchMemberDetails();
       });
     } catch (err) {
