@@ -1,3 +1,10 @@
+export interface UserCredentials {
+  token: string;
+  role: UserRole;
+  lc: string;
+}
+
+export type UserRole = "admin" | "national" | "local" | "none";
 export interface Comment {
   changedAt: Date;
   entry: string;
