@@ -1,27 +1,24 @@
-# MinimalCrmApp
+# PolarCRM-Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+CRM App for AIESEC in Germany to manage new applicants as well as current members of the organization
 
-## Development server
+## Stack
+### Frontend
+- Angular 16
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Backend
+- NodeJS
+- ExpressJS
+- MongoDB
 
-## Code scaffolding
+The Backend can be found [here](https://github.com/gbcarlos/PolarCRM-Backend)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Get Started
+- Clone the repo and execute `npm i`
+- To run the code execute `npm start`
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Environment File
+You will have to create an environment.development.ts file to get access to the backend.
+The environment file needs to contain the following entries:
+- googleClientId: 'example123.apps.googleusercontent.com' (Google Client ID can be found [here](https://developers.google.com/identity/oauth2/web/guides/get-google-api-clientid?hl=en)
+- serverUrl: 'http://localhost:8000' (The URL where your server is running)
