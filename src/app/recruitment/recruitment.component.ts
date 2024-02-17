@@ -22,6 +22,7 @@ export class RecruitmentComponent implements OnInit {
   dataSource: MatTableDataSource<ApplicantData> = new MatTableDataSource<ApplicantData>();
   applicants: ApplicantData[] = [];
   openCounter: number = 0;
+  filteredApplicants: number = 0;
   includeArchived: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,6 +62,7 @@ export class RecruitmentComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.filteredApplicants = this.dataSource.filteredData.length;
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
