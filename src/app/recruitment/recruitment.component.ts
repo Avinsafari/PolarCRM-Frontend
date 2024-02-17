@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class RecruitmentComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'stage', 'signup-date'];
+  displayedColumns: string[] = ['_id', 'firstName', 'familyName', 'lc', 'stage', 'createdAt'];
   dataSource: MatTableDataSource<ApplicantData> = new MatTableDataSource<ApplicantData>();
   applicants: ApplicantData[] = [];
   openCounter: number = 0;
@@ -49,6 +49,7 @@ export class RecruitmentComponent implements OnInit {
         this.applicants = applicants;
         this.dataSource.data = this.applicants;
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
     } catch (err) {
       if(err instanceof Error) {
