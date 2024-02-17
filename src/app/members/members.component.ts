@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./members.component.scss']
 })
 export class MembersComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'first-name', 'family-name', 'lc', 'stage', 'role-current', 'team-current', 'membership-verified'];
+  displayedColumns: string[] = ['_id', 'firstName', 'familyName', 'lc', 'stage', 'role-current', 'team-current', 'membershipVerified'];
   dataSource: MatTableDataSource<MemberData>;
   members: MemberData[] = [];
   memberCounter: number = 0;
@@ -46,6 +46,7 @@ export class MembersComponent implements OnInit{
         this.members = members;
         this.dataSource = new MatTableDataSource(this.members);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
     } catch (err) {
       if(err instanceof Error) {
