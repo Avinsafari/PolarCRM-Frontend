@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MemberDataDetail, Comment } from '../interfaces';
+import { MemberDataDetail, Comment, MemberStageType, MemberStageTypeDisplay, RoleType, RoleTypeDisplay, FunctionType, FunctionTypeDisplay } from '../interfaces';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
 import { DisplayService } from '../display.service';
@@ -87,15 +87,15 @@ export class MembersDetailComponent implements OnInit {
     return this.datetimeService.transformDate(date);
   }
 
-  transformStageView(stage: string): string {
+  transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {
     return this.displayService.getMemberStageDisplayValue(stage);
   }
 
-  transformRoleView(role: string): string {
+  transformRoleView(role: RoleType): RoleTypeDisplay | string {
     return this.displayService.getMemberRoleDisplayValue(role);
   }
 
-  transformFunctionView(functionName: string): string {
+  transformFunctionView(functionName: FunctionType): FunctionTypeDisplay | string {
     return this.displayService.getMemberFunctionDisplayValue(functionName);
   }
 }

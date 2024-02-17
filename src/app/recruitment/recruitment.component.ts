@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RecruiterDetailComponent } from '../recruiter-detail/recruiter-detail.component';
-import { ApplicantData } from '../interfaces';
+import { ApplicantData, ApplicantStageType, ApplicantStageTypeDisplay, LcType, LcTypeDisplay } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
 import { DatetimeService } from '../datetime.service';
@@ -84,11 +84,15 @@ export class RecruitmentComponent implements OnInit {
     this.dialog.open(RecruiterDetailComponent, dialogConfig);
   }
 
-  transformStageView(stage: string): string {
+  transformStageView(stage: ApplicantStageType): ApplicantStageTypeDisplay | string {
     return this.displayService.getApplicantStageDisplayValue(stage);
   }
 
   transformDate(date: string): string {
     return this.datetimeService.transformDate(date);
+  }
+
+  transformLc(lc: LcType): LcTypeDisplay | string {
+    return this.displayService.getLcDisplayValue(lc);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApplicantDataDetail, ApplicantStage, ApplicantStageType, Comment, MotivationForJoining } from '../interfaces';
+import { ApplicantDataDetail, ApplicantStage, ApplicantStageType, ApplicantStageTypeDisplay, Comment, MotivationForJoining } from '../interfaces';
 import { ApplicantService } from '../applicant.service';
 import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
@@ -140,7 +140,7 @@ export class RecruiterDetailComponent implements OnInit {
     return this.datetimeService.transformDateAndTime(date);
   }
 
-  transformStageView(stage: string): string {
+  transformStageView(stage: ApplicantStageType): ApplicantStageTypeDisplay | string {
     return this.displayService.getApplicantStageDisplayValue(stage);
   }
 }

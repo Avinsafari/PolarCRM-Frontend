@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MemberData } from '../interfaces';
+import { FunctionType, FunctionTypeDisplay, LcType, LcTypeDisplay, MemberData, MemberStageType, MemberStageTypeDisplay, RoleType, RoleTypeDisplay } from '../interfaces';
 import { MembersDetailComponent } from '../members-detail/members-detail.component';
 import { MemberService } from '../member.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
@@ -82,15 +82,19 @@ export class MembersComponent implements OnInit{
     this.dialog.open(MembersDetailComponent, dialogConfig);
   }
 
-  transformStageView(stage: string): string {
+  transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {
     return this.displayService.getMemberStageDisplayValue(stage);
   }
 
-  transformRoleView(role: string): string {
+  transformRoleView(role: RoleType): RoleTypeDisplay | string {
     return this.displayService.getMemberRoleDisplayValue(role);
   }
 
-  transformFunctionView(functionName: string): string {
+  transformFunctionView(functionName: FunctionType): FunctionTypeDisplay | string {
     return this.displayService.getMemberFunctionDisplayValue(functionName);
-  } 
+  }
+
+  transformLc(lc: LcType): LcTypeDisplay | string {
+    return this.displayService.getLcDisplayValue(lc);
+  }
 }

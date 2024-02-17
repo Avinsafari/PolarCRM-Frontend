@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Comment, Function, FunctionType, MemberDataDetail, MemberStage, MemberStageType, Role, RoleType } from '../interfaces';
+import { Comment, Function, FunctionType, FunctionTypeDisplay, MemberDataDetail, MemberStage, MemberStageType, MemberStageTypeDisplay, Role, RoleType, RoleTypeDisplay } from '../interfaces';
 import { MemberService } from '../member.service';
 import { MatChipListboxChange } from '@angular/material/chips';
 import { DateTime } from 'luxon';
@@ -47,8 +47,10 @@ export class PerformanceManagementDetailsComponent {
   public functions: Function[] = [
     {value: 'finance', displayValue: 'Finance'},
     {value: 'marketing', displayValue: 'Marketing'},
-    {value: 'outgoingGlobalExchange', displayValue: 'Outgoing Global Exchange'},
-    {value: 'incomingGlobalExchange', displayValue: 'Incoming Global Exchange'},
+    {value: 'outgoingGlobalVolunteer', displayValue: 'Outgoing Global Volunteer'},
+    {value: 'outgoingGlobalTalent', displayValue: 'Outgoing Global Talent'},
+    {value: 'incomingGlobalVolunteer', displayValue: 'Incoming Global Volunteer'},
+    {value: 'incomingGlobalTalent', displayValue: 'Incoming Global Talent'},
     {value: 'talentManagement', displayValue: 'Talent Management'}
   ];
 
@@ -209,15 +211,15 @@ export class PerformanceManagementDetailsComponent {
     this.dialog.open(ResponsiveDialogComponent, dialogConfig);
   }
 
-  transformStageView(stage: string): string {
+  transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {
     return this.displayService.getMemberStageDisplayValue(stage);
   }
 
-  transformRoleView(role: string): string {
+  transformRoleView(role: RoleType): RoleTypeDisplay | string {
     return this.displayService.getMemberRoleDisplayValue(role);
   }
 
-  transformFunctionView(functionName: string): string {
+  transformFunctionView(functionName: FunctionType): FunctionTypeDisplay | string {
     return this.displayService.getMemberFunctionDisplayValue(functionName);
   }
 
