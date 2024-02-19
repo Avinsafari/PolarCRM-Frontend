@@ -32,7 +32,7 @@
             <input type="text" class="chatbox" [(ngModel)]="newComment" (keydown.enter)="addComment()" placeholder="Add Comment">
         </div>
         <span class="stage">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Change Applicant Stage</mat-label>
                 <mat-select [(value)]="currentApplicantStage" [disabled]="currentApplicantStage === 'selected'">
                   <mat-option *ngFor="let stage of applicantStages" [value]="stage.value">{{stage.displayValue}}</mat-option>
