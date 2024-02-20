@@ -107,8 +107,6 @@ mat-form-field {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border: 3px solid var(--primary-color);
-    border-radius: $box-border-radius;
     
     mat-form-field {
         min-width: 16rem;
