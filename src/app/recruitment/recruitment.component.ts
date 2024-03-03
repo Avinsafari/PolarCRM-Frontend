@@ -21,9 +21,9 @@ export class RecruitmentComponent implements OnInit {
   displayedColumns: string[] = ['_id', 'firstName', 'familyName', 'lc', 'stage', 'createdAt'];
   dataSource: MatTableDataSource<ApplicantData> = new MatTableDataSource<ApplicantData>();
   applicants: ApplicantData[] = [];
-  openCounter: number = 0;
-  filteredApplicants: number = 0;
-  includeArchived: boolean = false;
+  openCounter = 0;
+  filteredApplicants = 0;
+  includeArchived = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./members-detail.component.scss']
 })
 export class MembersDetailComponent implements OnInit {
-  ready: boolean = false;
+  ready = false;
   form: FormGroup;
   comments: string[];
   newComment: string;
@@ -79,12 +79,12 @@ export class MembersDetailComponent implements OnInit {
     }
   }
 
-  transformDateAndTime(date: any): string {
-    return this.datetimeService.transformDateAndTime(date);
+  transformDateAndTime(date: unknown): string {
+    return this.datetimeService.transformDateAndTime(date as string);
   }
 
-  transformDate(date: any): string{
-    return this.datetimeService.transformDate(date);
+  transformDate(date: unknown): string{
+    return this.datetimeService.transformDate(date as string);
   }
 
   transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {

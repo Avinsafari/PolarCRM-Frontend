@@ -20,18 +20,17 @@ export class AuthService {
   public authenticateUser(user: SocialUser): Promise<UserCredentials> {
     return new Promise((resolve) => {
       this.user.token = user.idToken;
-      try {
-        const req = this.http.post<any>(
-          this.domain,
-          { "token": this.user.token },
-          { headers: {'Content-Type': 'application/json'} }
-        );
-        req.subscribe((res) => {
-          this.user.role = res.userRole;
-          this.user.lc = res.lc;
-          resolve(this.user);
-        });
-      } catch(error) { throw error; }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const req = this.http.post<any>(
+        this.domain,
+        { "token": this.user.token },
+        { headers: {'Content-Type': 'application/json'} }
+      );
+      req.subscribe((res) => {
+        this.user.role = res.userRole;
+        this.user.lc = res.lc;
+        resolve(this.user);
+      });
     });
   }
 

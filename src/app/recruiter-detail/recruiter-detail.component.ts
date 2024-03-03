@@ -1,11 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ApplicantDataDetail, ApplicantStage, ApplicantStageType, ApplicantStageTypeDisplay, Comment, MotivationForJoining } from '../interfaces';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApplicantService } from '../applicant.service';
-import { MemberService } from '../member.service';
 import { DatetimeService } from '../datetime.service';
 import { DisplayService } from '../display.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  ApplicantDataDetail,
+  ApplicantStage,
+  ApplicantStageType,
+  ApplicantStageTypeDisplay,
+  Comment,
+  MotivationForJoining
+} from '../interfaces';
+import { MemberService } from '../member.service';
 
 @Component({
   selector: 'app-recruiter-detail',
@@ -13,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./recruiter-detail.component.scss']
 })
 export class RecruiterDetailComponent implements OnInit {
-  ready: boolean = false;
+  ready = false;
   comments: string[];
   newComment: string;
   motivationForJoining: boolean[];
@@ -135,9 +142,9 @@ export class RecruiterDetailComponent implements OnInit {
     }
     this.close();
   }
-
-  transformDateAndTime(date: any): string {
-    return this.datetimeService.transformDateAndTime(date);
+  
+  transformDateAndTime(date: unknown): string {
+    return this.datetimeService.transformDateAndTime(date as string);
   }
 
   transformStageView(stage: ApplicantStageType): ApplicantStageTypeDisplay | string {

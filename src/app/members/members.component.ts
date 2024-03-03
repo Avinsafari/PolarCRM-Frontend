@@ -19,9 +19,9 @@ export class MembersComponent implements OnInit{
   displayedColumns: string[] = ['_id', 'firstName', 'familyName', 'lc', 'stage', 'role-current', 'team-current', 'membershipVerified'];
   dataSource: MatTableDataSource<MemberData>;
   members: MemberData[] = [];
-  memberCounter: number = 0;
-  filteredMembers: number = 0;
-  includeArchived: boolean = false;
+  memberCounter = 0;
+  filteredMembers = 0;
+  includeArchived = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

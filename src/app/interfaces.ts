@@ -127,7 +127,7 @@ export const roleMap: Map<RoleType, RoleTypeDisplay> = new Map([
 export type FunctionType = "none" | "finance" | "marketing" | "outgoingGlobalVolunteer" | "outgoingGlobalTalent" | "incomingGlobalVolunteer" | "incomingGlobalTalent" | "talentManagement" ;
 export type FunctionTypeDisplay = "None" | "Finance" | "Marketing" | "Outgoing Global Volunteer" | "Outgoing Global Talent" | "Incoming Global Volunteer" | "Incoming Global Talent" | "Talent Management";
 
-export interface Function {
+export interface IFunction {
   value: FunctionType;
   displayValue: FunctionTypeDisplay;
 }

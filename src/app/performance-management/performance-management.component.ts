@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MemberService } from '../member.service';
 import { MemberData } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,12 +8,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './performance-management.component.html',
   styleUrls: ['./performance-management.component.scss']
 })
-export class PerformanceManagementComponent {
+export class PerformanceManagementComponent implements OnInit {
 
-  public includeArchived: boolean = false;
+  public includeArchived = false;
   public members: MemberData[];
-  public selectedMemberId: number = 3;
-  public ready: boolean = false;
+  public selectedMemberId = 3;
+  public ready = false;
 
   constructor(
     private memberService: MemberService,

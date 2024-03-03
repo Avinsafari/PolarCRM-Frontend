@@ -1,25 +1,37 @@
-import { Component } from '@angular/core';
-import { Comment, Function, FunctionType, FunctionTypeDisplay, MemberDataDetail, MemberStage, MemberStageType, MemberStageTypeDisplay, Role, RoleType, RoleTypeDisplay } from '../interfaces';
-import { MemberService } from '../member.service';
+import { Component, OnInit } from '@angular/core';
 import { MatChipListboxChange } from '@angular/material/chips';
-import { DateTime } from 'luxon';
-import { DisplayService } from '../display.service';
-import { DatetimeService } from '../datetime.service';
-import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ResponsiveDialogComponent } from '../responsive-dialog/responsive-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { DateTime } from 'luxon';
+import { DatetimeService } from '../datetime.service';
+import { DisplayService } from '../display.service';
+import {
+  Comment,
+  FunctionType,
+  FunctionTypeDisplay,
+  IFunction,
+  MemberDataDetail,
+  MemberStage,
+  MemberStageType,
+  MemberStageTypeDisplay,
+  Role,
+  RoleType,
+  RoleTypeDisplay
+} from '../interfaces';
+import { MemberService } from '../member.service';
+import { ResponsiveDialogComponent } from '../responsive-dialog/responsive-dialog.component';
 
 @Component({
   selector: 'app-performance-management-details',
   templateUrl: './performance-management-details.component.html',
   styleUrls: ['./performance-management-details.component.scss']
 })
-export class PerformanceManagementDetailsComponent {
+export class PerformanceManagementDetailsComponent implements OnInit {
 
   public memberDetails: MemberDataDetail;
-  public ready: boolean = false;
-  public panelOpenState: boolean = false;
+  public ready = false;
+  public panelOpenState = false;
   public newRole: RoleType;
   public newFunction: FunctionType;
   public newJobDescription: string;
@@ -44,7 +56,7 @@ export class PerformanceManagementDetailsComponent {
     {value: 'teamLeader', displayValue: 'Team Leader'},
     {value: 'vicePresident', displayValue: 'Vice President'}
   ];
-  public functions: Function[] = [
+  public functions: IFunction[] = [
     {value: 'finance', displayValue: 'Finance'},
     {value: 'marketing', displayValue: 'Marketing'},
     {value: 'outgoingGlobalVolunteer', displayValue: 'Outgoing Global Volunteer'},
@@ -223,7 +235,7 @@ export class PerformanceManagementDetailsComponent {
     return this.displayService.getMemberFunctionDisplayValue(functionName);
   }
 
-  transformDate(date: any): string {
-    return this.dateService.transformDate(date);
+  transformDate(date: unknown): string {
+    return this.dateService.transformDate(date as string);
   }
 }
