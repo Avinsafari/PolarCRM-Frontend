@@ -33,7 +33,8 @@
         ],
         "no-empty-function": "off",
         "@typescript-eslint/no-empty-function": "off",
-        "@angular-eslint/no-empty-lifecycle-method": "off"
+        "@angular-eslint/no-empty-lifecycle-method": "off",
+        "quotes": ["error", "single", { "allowTemplateLiterals": true }]
       }
     },
     {

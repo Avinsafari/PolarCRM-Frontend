@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatChipSelectionChange } from '@angular/material/chips';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FunctionType, FunctionTypeDisplay, LcType, LcTypeDisplay, MemberData, MemberStageType, MemberStageTypeDisplay, RoleType, RoleTypeDisplay } from '../interfaces';
-import { MembersDetailComponent } from '../members-detail/members-detail.component';
-import { MemberService } from '../member.service';
-import { MatChipSelectionChange } from '@angular/material/chips';
 import { DisplayService } from '../display.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FunctionType, FunctionTypeDisplay, LcType, LcTypeDisplay, MemberData, MemberStageType, MemberStageTypeDisplay, RoleType, RoleTypeDisplay } from '../interfaces';
+import { MemberService } from '../member.service';
+import { MembersDetailComponent } from '../members-detail/members-detail.component';
 
 @Component({
   selector: 'app-members',
@@ -50,9 +50,9 @@ export class MembersComponent implements OnInit{
       });
     } catch (err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("Members could not be fetched", "", { duration: 5000 });
+        this.snackbar.open('Members could not be fetched', '', { duration: 5000 });
       }
     }
   }

@@ -57,7 +57,7 @@ export class RecruiterDetailComponent implements OnInit {
 
   ngOnInit() {
     this.comments = [];
-    this.newComment = "";
+    this.newComment = '';
     this.fetchApplicantDetails();
   }
 
@@ -73,9 +73,9 @@ export class RecruiterDetailComponent implements OnInit {
       });
     } catch (err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("Applicant Details could not be fetched", "", { duration: 5000 });
+        this.snackbar.open('Applicant Details could not be fetched', '', { duration: 5000 });
       }
     }
   }
@@ -86,7 +86,7 @@ export class RecruiterDetailComponent implements OnInit {
   }
   
   addComment() {
-    if (this.newComment != "") {
+    if (this.newComment != '') {
       const newComment: Comment = {
         changedAt: new Date(),
         entry: this.newComment,
@@ -97,7 +97,7 @@ export class RecruiterDetailComponent implements OnInit {
       .subscribe(updatedApplicant => {
         this.applicantDetails.comments = updatedApplicant.comments;
       });
-      this.newComment = "";
+      this.newComment = '';
     }
   }
 
@@ -114,29 +114,29 @@ export class RecruiterDetailComponent implements OnInit {
     this.applicantDetails.comments.push(newComment);
     try {
       this.applicantService.updateApplicant(this.applicantDetails).subscribe(() => {
-          this.snackbar.open("Applicant has been updated", "", { duration: 2000 });
+          this.snackbar.open('Applicant has been updated', '', { duration: 2000 });
         }
       );
     } catch(err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("Applicant could not be updated", "", { duration: 5000 });
+        this.snackbar.open('Applicant could not be updated', '', { duration: 5000 });
       }
       return;
     }
     
-    if(this.currentApplicantStage == "selected"){
+    if(this.currentApplicantStage == 'selected'){
       try {
         this.memberService.createNewMember(this.applicantDetails).subscribe((message) => {
-            this.snackbar.open(JSON.parse(JSON.stringify(message))["message"], "", { duration: 2000 });
+            this.snackbar.open(JSON.parse(JSON.stringify(message))['message'], '', { duration: 2000 });
           }
         );
       } catch(err) {
         if(err instanceof Error) {
-          this.snackbar.open(err.message, "", { duration: 5000 });
+          this.snackbar.open(err.message, '', { duration: 5000 });
         } else {
-          this.snackbar.open("Applicant could not be added as a new member", "", { duration: 5000 });
+          this.snackbar.open('Applicant could not be added as a new member', '', { duration: 5000 });
         }
       }
     }

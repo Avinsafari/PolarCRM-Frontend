@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MemberService } from '../member.service';
-import { MemberData } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MemberData } from '../interfaces';
+import { MemberService } from '../member.service';
 
 @Component({
   selector: 'app-performance-management',
@@ -28,9 +28,9 @@ export class PerformanceManagementComponent implements OnInit {
       });
     } catch (err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("Members could not be fetched", "", { duration: 5000 });
+        this.snackbar.open('Members could not be fetched', '', { duration: 5000 });
       }
     }
   }

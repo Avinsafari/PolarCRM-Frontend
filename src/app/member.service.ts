@@ -1,22 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MemberData, MemberDataDetail, ApplicantDataDetail } from './interfaces';
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { ApplicantDataDetail, MemberData, MemberDataDetail } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberService {
 
-  domain = "http://localhost:8000/members/";
-  memberCountUrl = this.domain + "count";
-  previewAllMembersUrl = this.domain + "preview/all";
-  previewCurrentMembersUrl = this.domain + "preview/current";
-  detailOneMemberUrl = this.domain + "detail/";
-  createNewMemberUrl = this.domain + "new";
-  updateMemberUrl = this.domain + "update/";
-  addNewRoleUrl = this.domain + "add-new-role/";
+  domain = 'http://localhost:8000/members/';
+  memberCountUrl = this.domain + 'count';
+  previewAllMembersUrl = this.domain + 'preview/all';
+  previewCurrentMembersUrl = this.domain + 'preview/current';
+  detailOneMemberUrl = this.domain + 'detail/';
+  createNewMemberUrl = this.domain + 'new';
+  updateMemberUrl = this.domain + 'update/';
+  addNewRoleUrl = this.domain + 'add-new-role/';
 
   constructor(
     private http: HttpClient,

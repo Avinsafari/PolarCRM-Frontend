@@ -1,14 +1,14 @@
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserCredentials, UserRole } from './interfaces';
-import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public domain = "http://localhost:8000/login/";
+  public domain = 'http://localhost:8000/login/';
   public user: UserCredentials = {
     token: '',
     role: 'none',
@@ -23,7 +23,7 @@ export class AuthService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const req = this.http.post<any>(
         this.domain,
-        { "token": this.user.token },
+        { 'token': this.user.token },
         { headers: {'Content-Type': 'application/json'} }
       );
       req.subscribe((res) => {

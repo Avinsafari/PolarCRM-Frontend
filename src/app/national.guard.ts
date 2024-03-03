@@ -4,5 +4,5 @@ import { AuthService } from './auth.service';
 
 export const nationalGuard: CanActivateFn = (): boolean => {
   const authService = inject(AuthService);
-  return authService.reauthenticateUser("national");
+  return authService.reauthenticateUser('national');
 };
