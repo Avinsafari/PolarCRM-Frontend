@@ -143,12 +143,11 @@ export const functionMap: Map<FunctionType, FunctionTypeDisplay> = new Map([
   ['talentManagement', 'Talent Management']
 ]);
 
-export type LcType = 'aachen' | 'augsburg' | 'berlin-hu' | 'berlin-tu' | 'bielefeld' | 'bochum' | 'bonn' | 'braunschweig' | 'bremen' | 'darmstadt' | 'dresden' | 'duesseldorf' | 'frankfurt-main' | 'giessen-marburg' | 'goettingen' | 'halle' | 'hamburg' | 'hannover' | 'kaiserslautern' | 'karlsruhe' | 'koeln' | 'leipzig' | 'lueneburg' | 'magdeburg' | 'mainz-wiesbaden' | 'mannheim-heidelberg' | 'muenchen' | 'muenster' | 'nuernberg' | 'paderborn' | 'passau' | 'regensburg' | 'stuttgart-hohenheim';
-export type LcTypeDisplay = 'Aachen' | 'Augsburg' | 'Berlin HU' | 'Berlin TU' | 'Bielefeld' | 'Bochum' | 'Bonn' | 'Braunschweig' | 'Bremen' | 'Darmstadt' | 'Dresden' | 'Düsseldorf' | 'Frankfurt am Main' | 'Gießen-Marburg' | 'Göttingen' | 'Halle' | 'Hamburg' | 'Hannover' | 'Kaiserslautern' | 'Karlsruhe' | 'Köln' | 'Leipzig' | 'Lüneburg' | 'Magdeburg' | 'Mainz-Wiesbaden' | 'Mannheim & Heidelberg' | 'München' | 'Münster' | 'Nürnberg' | 'Paderborn' | 'Passau' | 'Regensburg' | 'Stuttgart & Hohenheim';
+export type LcType = 'aachen' | 'berlin-hu' | 'berlin-tu' | 'bielefeld' | 'bochum' | 'bonn' | 'braunschweig' | 'bremen' | 'dresden' | 'duesseldorf' | 'frankfurt-main' | 'goettingen' | 'halle' | 'hamburg' | 'hannover' | 'kaiserslautern' | 'karlsruhe' | 'koeln' | 'leipzig' | 'lueneburg' | 'magdeburg' | 'mainz' | 'mannheim' | 'muenchen' | 'muenster' | 'nuernberg' | 'paderborn' | 'passau' | 'regensburg' | 'stuttgart';
+export type LcTypeDisplay = 'Aachen' | 'Berlin HU' | 'Berlin TU' | 'Bielefeld' | 'Bochum' | 'Bonn' | 'Braunschweig' | 'Bremen' | 'Dresden' | 'Düsseldorf' | 'Frankfurt am Main' | 'Göttingen' | 'Halle' | 'Hamburg' | 'Hannover' | 'Kaiserslautern' | 'Karlsruhe' | 'Köln' | 'Leipzig' | 'Lüneburg' | 'Magdeburg' | 'Mainz-Wiesbaden' | 'Mannheim & Heidelberg' | 'München' | 'Münster' | 'Nürnberg' | 'Paderborn' | 'Passau' | 'Regensburg' | 'Stuttgart & Hohenheim';
 
 export const lcMap: Map<LcType, LcTypeDisplay> = new Map([
   ['aachen', 'Aachen'],
-  ['augsburg', 'Augsburg'],
   ['berlin-hu', 'Berlin HU'],
   ['berlin-tu', 'Berlin TU'],
   ['bielefeld', 'Bielefeld'],
@@ -156,11 +155,9 @@ export const lcMap: Map<LcType, LcTypeDisplay> = new Map([
   ['bonn', 'Bonn'],
   ['braunschweig', 'Braunschweig'],
   ['bremen', 'Bremen'],
-  ['darmstadt', 'Darmstadt'],
   ['dresden', 'Dresden'],
   ['duesseldorf', 'Düsseldorf'],
   ['frankfurt-main', 'Frankfurt am Main'],
-  ['giessen-marburg', 'Gießen-Marburg'],
   ['goettingen', 'Göttingen'],
   ['halle', 'Halle'],
   ['hamburg', 'Hamburg'],
@@ -171,15 +168,15 @@ export const lcMap: Map<LcType, LcTypeDisplay> = new Map([
   ['leipzig', 'Leipzig'],
   ['lueneburg', 'Lüneburg'],
   ['magdeburg', 'Magdeburg'],
-  ['mainz-wiesbaden', 'Mainz-Wiesbaden'],
-  ['mannheim-heidelberg', 'Mannheim & Heidelberg'],
+  ['mainz', 'Mainz-Wiesbaden'],
+  ['mannheim', 'Mannheim & Heidelberg'],
   ['muenchen', 'München'],
   ['muenster', 'Münster'],
   ['nuernberg', 'Nürnberg'],
   ['paderborn', 'Paderborn'],
   ['passau', 'Passau'],
   ['regensburg', 'Regensburg'],
-  ['stuttgart-hohenheim', 'Stuttgart & Hohenheim']
+  ['stuttgart', 'Stuttgart & Hohenheim']
 ]);
 
 export const signupFormLangMap: Map<string, string> = new Map([
