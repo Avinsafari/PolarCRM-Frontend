@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DateTime } from 'luxon';
 import { DatetimeService } from '../datetime.service';
 import { DisplayService } from '../display.service';
+import { DseService } from '../dse.service';
 import {
   Comment,
   FunctionType,
@@ -72,7 +73,8 @@ export class PerformanceManagementDetailsComponent implements OnInit {
     private dateService: DatetimeService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dseService: DseService
   ) { }
 
   ngOnInit(): void {
@@ -93,9 +95,9 @@ export class PerformanceManagementDetailsComponent implements OnInit {
       });
     } catch (err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("Member Details could not be fetched", "", { duration: 5000 });
+        this.snackbar.open('Member Details could not be fetched', '', { duration: 5000 });
       }
     }
   }
@@ -149,14 +151,14 @@ export class PerformanceManagementDetailsComponent implements OnInit {
 
     try {
       this.memberService.updateMember(this.memberDetails).subscribe(() => {
-        this.snackbar.open('Member has been updated successfully', "", { duration: 2000 });
+        this.snackbar.open('Member has been updated successfully', '', { duration: 2000 });
         this.fetchMemberDetails();
       });
     } catch (err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("Member could not be updated!", "", { duration: 5000 });
+        this.snackbar.open('Member could not be updated!', '', { duration: 5000 });
       }
     }
   }
@@ -206,14 +208,14 @@ export class PerformanceManagementDetailsComponent implements OnInit {
 
     try {
       this.memberService.addNewRole(this.memberDetails).subscribe(() => {
-        this.snackbar.open('New role has been added successfully', "", { duration: 2000 });
+        this.snackbar.open('New role has been added successfully', '', { duration: 2000 });
         this.fetchMemberDetails();
       });
     } catch (err) {
       if(err instanceof Error) {
-        this.snackbar.open(err.message, "", { duration: 5000 });
+        this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
-        this.snackbar.open("New role could not be saved!", "", { duration: 5000 });
+        this.snackbar.open('New role could not be saved!', '', { duration: 5000 });
       }
     }
   }
@@ -221,6 +223,24 @@ export class PerformanceManagementDetailsComponent implements OnInit {
   public openAdvancedRoleDialog() {
     const dialogConfig = new MatDialogConfig();
     this.dialog.open(ResponsiveDialogComponent, dialogConfig);
+  }
+
+  public uploadDoc(event: Event) {
+    if(!event) { return; }
+    const e = (event.target) as HTMLInputElement;
+    if(!e.files) { return; }
+    const file: File = e.files[0];
+    if(!file) { return; }
+    try {
+        this.dseService.uploadDocument(file)
+        .subscribe(() => {
+            this.snackbar.open('Document Upload successful', '', { duration: 2000 });
+        });
+    } catch(err) {
+        if(err instanceof Error) {
+            this.snackbar.open(err.message, '', { duration: 5000 });
+        }
+    }
   }
 
   transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {
