@@ -36,6 +36,8 @@ export class PerformanceManagementDetailsComponent implements OnInit {
   public newRole: RoleType;
   public newFunction: FunctionType;
   public newJobDescription: string;
+  public newExpaId: number;
+  public newAiesecEmail: string;
   public currentMemberId: number;
   public currentMemberStage: MemberStageType;
   public currentMemberRole: RoleType;
@@ -88,6 +90,8 @@ export class PerformanceManagementDetailsComponent implements OnInit {
     try {
       this.memberService.getMemberDetails(this.currentMemberId).subscribe(memberData => {
         this.memberDetails = memberData;
+        this.newExpaId = this.memberDetails.expaId;
+        this.newAiesecEmail = this.memberDetails.aiesecEmail;
         this.currentMemberStage = this.memberDetails.currentRole.stage;
         this.currentMemberRole = this.memberDetails.currentRole.role;
         this.currentMemberFunction = this.memberDetails.currentRole.function;
@@ -98,6 +102,21 @@ export class PerformanceManagementDetailsComponent implements OnInit {
         this.snackbar.open(err.message, '', { duration: 5000 });
       } else {
         this.snackbar.open('Member Details could not be fetched', '', { duration: 5000 });
+      }
+    }
+  }
+
+  public updateMemberData() {
+    try {
+      this.memberService.updateMember(this.memberDetails).subscribe(() => {
+        this.snackbar.open('Member has been updated successfully', '', { duration: 2000 });
+        this.fetchMemberDetails();
+      });
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, '', { duration: 5000 });
+      } else {
+        this.snackbar.open('Member could not be updated!', '', { duration: 5000 });
       }
     }
   }
@@ -149,18 +168,7 @@ export class PerformanceManagementDetailsComponent implements OnInit {
         break;
     }
 
-    try {
-      this.memberService.updateMember(this.memberDetails).subscribe(() => {
-        this.snackbar.open('Member has been updated successfully', '', { duration: 2000 });
-        this.fetchMemberDetails();
-      });
-    } catch (err) {
-      if(err instanceof Error) {
-        this.snackbar.open(err.message, '', { duration: 5000 });
-      } else {
-        this.snackbar.open('Member could not be updated!', '', { duration: 5000 });
-      }
-    }
+    this.updateMemberData();
   }
 
   public updateRole(event: MatChipListboxChange) {
@@ -225,6 +233,27 @@ export class PerformanceManagementDetailsComponent implements OnInit {
     this.dialog.open(ResponsiveDialogComponent, dialogConfig);
   }
 
+  public saveData() {
+    if(
+      this.newExpaId === this.memberDetails.expaId &&
+      this.newAiesecEmail === this.memberDetails.aiesecEmail
+    ) { return; }
+    this.memberDetails.expaId = this.newExpaId;
+    this.memberDetails.aiesecEmail = this.newAiesecEmail;
+    try {
+      this.memberService.addMemberInfo(this.memberDetails).subscribe(() => {
+        this.snackbar.open('Member has been updated successfully', '', { duration: 2000 });
+        this.fetchMemberDetails();
+      });
+    } catch (err) {
+      if(err instanceof Error) {
+        this.snackbar.open(err.message, '', { duration: 5000 });
+      } else {
+        this.snackbar.open('Member could not be updated!', '', { duration: 5000 });
+      }
+    }
+  }
+
   public uploadDoc(event: Event) {
     if(!event) { return; }
     const e = (event.target) as HTMLInputElement;
@@ -234,7 +263,15 @@ export class PerformanceManagementDetailsComponent implements OnInit {
     try {
         this.dseService.uploadDocument(file)
         .subscribe(() => {
-            this.snackbar.open('Document Upload successful', '', { duration: 2000 });
+          try {
+            this.memberService.verifyMembership(this.memberDetails).subscribe(() => {
+              this.snackbar.open('Document Upload successful', '', { duration: 2000 });
+            });
+          } catch (err) {
+            if(err instanceof Error) {
+              this.snackbar.open(err.message, '', { duration: 5000 });
+            }
+          }
         });
     } catch(err) {
         if(err instanceof Error) {
@@ -243,19 +280,19 @@ export class PerformanceManagementDetailsComponent implements OnInit {
     }
   }
 
-  transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {
+  public transformStageView(stage: MemberStageType): MemberStageTypeDisplay | string {
     return this.displayService.getMemberStageDisplayValue(stage);
   }
 
-  transformRoleView(role: RoleType): RoleTypeDisplay | string {
+  public transformRoleView(role: RoleType): RoleTypeDisplay | string {
     return this.displayService.getMemberRoleDisplayValue(role);
   }
 
-  transformFunctionView(functionName: FunctionType): FunctionTypeDisplay | string {
+  public transformFunctionView(functionName: FunctionType): FunctionTypeDisplay | string {
     return this.displayService.getMemberFunctionDisplayValue(functionName);
   }
 
-  transformDate(date: unknown): string {
+  public transformDate(date: unknown): string {
     return this.dateService.transformDate(date as string);
   }
 }
