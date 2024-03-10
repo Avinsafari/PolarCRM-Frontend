@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ApplicantData, ApplicantDataDetail } from './interfaces';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApplicantService {
     
-    domain = 'http://localhost:8000/applicants/';
+    domain = environment.serverUrl + '/applicants/';
     openCountUrl = this.domain + 'open-count';
     previewAllApplicantsUrl = this.domain + 'preview/all';
     previewCurrentApplicantsUrl = this.domain + 'preview/current';

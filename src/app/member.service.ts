@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ApplicantDataDetail, MemberData, MemberDataDetail } from './interfaces';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberService {
 
-  domain = 'http://localhost:8000/members/';
+  domain = environment.serverUrl + '/members/';
   memberCountUrl = this.domain + 'count';
   previewAllMembersUrl = this.domain + 'preview/all';
   previewCurrentMembersUrl = this.domain + 'preview/current';

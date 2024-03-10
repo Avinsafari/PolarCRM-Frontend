@@ -2,13 +2,14 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserCredentials, UserRole } from './interfaces';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public domain = 'http://localhost:8000/login/';
+  public domain = environment.serverUrl + '/login/';
   public user: UserCredentials = {
     token: '',
     role: 'none',

@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DseService {
 
-    public backend = 'http://localhost:8000/utils/upload';
+    public backend = environment.serverUrl + '/utils/upload';
 
     constructor(
         private http: HttpClient,
