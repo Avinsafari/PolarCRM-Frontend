@@ -36,6 +36,7 @@ import { PerformanceManagementDetailsComponent } from './performance-management-
 import { ResponsiveDialogComponent } from './responsive-dialog/responsive-dialog.component';
 import { environment } from 'src/environments/environment.development';
 import { InternalLayoutComponent } from './internal-layout/internal-layout.component';
+import { PolarLogoComponent } from './polar-logo/polar-logo.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { InternalLayoutComponent } from './internal-layout/internal-layout.compo
     MembersDetailComponent,
     PerformanceManagementDetailsComponent,
     ResponsiveDialogComponent,
-    InternalLayoutComponent
+    InternalLayoutComponent,
+    PolarLogoComponent
   ],
   imports: [
     BrowserModule,
