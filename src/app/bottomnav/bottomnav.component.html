@@ -1,0 +1,17 @@
+<div class="bottomnav">
+    <ul class="bottomnav-nav">
+        <li class="bottomnav-nav-item" *ngFor="let data of navData">
+            <a class="bottomnav-nav-link" [routerLink]="[data.routeLink]" 
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="bottomnav-link-icon" [class]="data.icon"></i>
+            </a>
+        </li>
+        <li class="bottomnav-nav-item" (click)="logout()" (keydown)="logout()" tabindex="0">
+            <a class="bottomnav-nav-link">
+                <i class="bottomnav-link-icon" [class]="'fal fa-sign-out-alt'"></i>
+            </a>
+        </li>
+    </ul>
+</div>

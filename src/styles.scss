@@ -10,6 +10,10 @@
     --sidenav-border-radius: 15px;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 *::-webkit-scrollbar {
     width: 16px;
 }

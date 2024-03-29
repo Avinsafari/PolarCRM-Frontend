@@ -1,8 +1,24 @@
-<div class="main">
-    <div class="sidenav">
-        <app-sidenav (toggleSideNav)="toggleSideNav($event)"></app-sidenav>
+<ng-container *ngIf="mobile; then mobileLayout else desktopLayout">
+</ng-container>
+
+<ng-template #desktopLayout>
+    <div class="main">
+        <div class="sidenav">
+            <app-sidenav (toggleSideNav)="toggleSideNav($event)"></app-sidenav>
+        </div>
+        <div class="body">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-    <div class="body">
-        <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #mobileLayout>
+    <div class="main-mobile">
+        <div class="body">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="bottomnav">
+            <app-bottomnav></app-bottomnav>
+        </div>
     </div>
-</div>
+</ng-template>

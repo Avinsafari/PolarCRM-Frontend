@@ -1,7 +1,12 @@
-.main {
+.main,
+.main-mobile {
     display: flex;
     height: 100vh;
     background-color: var(--secondary-color);
+}
+
+.main-mobile {
+    flex-direction: column;
 }
 
 .sidenav {
