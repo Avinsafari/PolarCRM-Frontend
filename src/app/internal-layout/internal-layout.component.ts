@@ -1,4 +1,4 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs';
 
