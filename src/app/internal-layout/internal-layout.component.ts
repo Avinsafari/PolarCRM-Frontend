@@ -24,7 +24,6 @@ export class InternalLayoutComponent implements OnDestroy {
     .pipe(takeUntil(this.destroy))
     .subscribe(result => {
       this.mobile = result.matches;
-      console.log('mobile', this.mobile);
     });
   }
 
