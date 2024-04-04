@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatChipSelectionChange } from '@angular/material/chips';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -78,13 +78,44 @@ export class RecruitmentComponent implements OnInit {
 
   openDetails(id: number) {
     const dialogConfig = new MatDialogConfig();
+    const deviceWidth = window.innerWidth;
 
     dialogConfig.autoFocus = true;
     dialogConfig.data = id;
-    dialogConfig.width = '80vw';
-    dialogConfig.height = '80vh';
+    dialogConfig.maxHeight='90vh';
+    dialogConfig.maxWidth='100vw'
+    dialogConfig.width = this.calculateDialogWidth(deviceWidth);
+    dialogConfig.height = this.calculateDialogHeight(deviceWidth);
+    
+    const dialogRef= this.dialog.open(RecruiterDetailComponent, dialogConfig);
 
-    this.dialog.open(RecruiterDetailComponent, dialogConfig);
+    dialogRef.afterOpened().subscribe(() => {
+      window.addEventListener('resize', this.onWindowResize.bind(this, dialogRef), true);
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      window.removeEventListener('resize', this.onWindowResize.bind(this, dialogRef), true);
+    });
+  }
+
+  onWindowResize(dialogRef: MatDialogRef<RecruiterDetailComponent>, event: Event) {
+    const deviceWidth = window.innerWidth;
+    dialogRef.updateSize(this.calculateDialogWidth(deviceWidth), this.calculateDialogHeight(deviceWidth));
+  }
+
+  calculateDialogWidth(deviceWidth: number): string {
+    if (deviceWidth <= 768) {
+      return '100vw';
+    } else {
+      return '80vw';
+    }
+  }
+  calculateDialogHeight(deviceWidth: number): string {
+    if (deviceWidth <= 768) {
+      return '90vh';
+    } else {
+      return '80vh';
+    }
   }
 
   transformStageView(stage: ApplicantStageType): ApplicantStageTypeDisplay | string {

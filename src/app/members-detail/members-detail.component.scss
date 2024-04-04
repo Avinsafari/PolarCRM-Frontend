@@ -51,6 +51,7 @@
     grid-column: 2 / span 1;
     grid-row: 1 / span 14;
     display: flex;
+    min-width: 14rem;
     flex-direction: column;
     border-radius: $box-border-radius;
     border: 3px solid var(--primary-color);
@@ -92,4 +93,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+    .content {
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(7, 1fr);
+    }
+    .member-information {
+        grid-row: 1 / span 3; 
+    }
+
+    .stage{
+        grid-row: 4/ span 1;
+        margin-bottom: 5rem;
+    }
+    .comment-box {
+        grid-column: 1; 
+        grid-row: 5/ span 3; 
+    }
 }
